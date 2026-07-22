@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jae Geun Hong — Mechanism &amp; Hardware Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blueprint: #0B2545;
+    --blueprint-deep: #071A33;
+    --cyan: #5FC1D6;
+    --cyan-dim: rgba(95,193,214,0.35);
+    --paper: #F4F1EA;
+    --paper-dim: #E7E2D6;
+    --brass: #C08552;
+    --graphite: #1B2430;
+    --grid-line: rgba(95,193,214,0.14);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--graphite);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+  }
+
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    background:
+      linear-gradient(var(--blueprint-deep), var(--blueprint)),
+      repeating-linear-gradient(0deg, var(--grid-line) 0 1px, transparent 1px 40px),
+      repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px 40px);
+    color: var(--paper);
+    padding: 100px 24px 80px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 3px solid var(--cyan);
+  }
+
+  .hero::before {
+    content: "SHEET 00 / TITLE";
+    position: absolute;
+    top: 20px;
+    left: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--cyan);
+    opacity: 0.8;
+  }
+
+  .hero::after {
+    content: "REV. 2026.07";
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--cyan);
+    opacity: 0.8;
+  }
+
+  .hero-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    color: var(--cyan);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 18px;
+  }
+
+  .hero p.lede {
+    font-size: 1.1rem;
+    color: rgba(244,241,234,0.82);
+    max-width: 620px;
+    margin: 0 auto 34px;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+
+  .hero-links a {
+    color: var(--paper);
+    text-decoration: none;
+    border: 1px solid var(--cyan-dim);
+    padding: 9px 16px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+  }
+
+  .hero-links a:hover {
+    background: var(--cyan);
+    color: var(--blueprint-deep);
+    border-color: var(--cyan);
+  }
+
+  /* ---------- NAV DIMENSION LINE ---------- */
+  .dim-nav {
+    background: var(--paper-dim);
+    border-bottom: 1px solid rgba(27,36,48,0.12);
+    padding: 14px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .dim-nav-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    gap: 28px;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+
+  .dim-nav a {
+    color: var(--graphite);
+    text-decoration: none;
+    opacity: 0.65;
+    transition: opacity 0.2s ease;
+  }
+
+  .dim-nav a:hover { opacity: 1; color: var(--brass); }
+
+  /* ---------- SECTIONS ---------- */
+  section.sheet {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 70px 24px;
+    position: relative;
+  }
+
+  .sheet-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--brass);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .sheet-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: repeating-linear-gradient(90deg, var(--brass) 0 6px, transparent 6px 11px);
+    opacity: 0.5;
+  }
+
+  .sheet h2 {
+    font-size: clamp(1.6rem, 3.4vw, 2.2rem);
+    margin-bottom: 8px;
+    color: var(--blueprint);
+  }
+
+  .sheet .sub {
+    color: #5b6472;
+    margin-bottom: 36px;
+    max-width: 640px;
+  }
+
+  /* ---------- SPEC CALLOUTS ---------- */
+  .specs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1px;
+    background: rgba(27,36,48,0.12);
+    border: 1px solid rgba(27,36,48,0.12);
+    margin: 30px 0 42px;
+  }
+
+  .spec {
+    background: var(--paper);
+    padding: 18px 14px;
+    text-align: center;
+  }
+
+  .spec .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--blueprint);
+    display: block;
+  }
+
+  .spec .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #5b6472;
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ---------- MEDIA BLOCKS ---------- */
+  .media-block {
+    margin-bottom: 44px;
+  }
+
+  .media-frame {
+    border: 1px solid rgba(11,37,69,0.2);
+    background: var(--blueprint-deep);
+    padding: 6px;
+    position: relative;
+  }
+
+  .media-frame::before {
+    content: attr(data-tag);
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    background: var(--blueprint);
+    color: var(--cyan);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border: 1px solid var(--cyan-dim);
+  }
+
+  .media-frame img,
+  .media-frame video {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .caption {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: #5b6472;
+    margin-top: 10px;
+    line-height: 1.5;
+    padding-left: 2px;
+    border-left: 2px solid var(--cyan);
+    padding-left: 10px;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  @media (max-width: 720px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .gallery .media-frame img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  /* ---------- ROLE / DESCRIPTION LIST ---------- */
+  ul.role-list {
+    list-style: none;
+    margin: 0 0 30px;
+  }
+
+  ul.role-list li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 10px;
+    color: var(--graphite);
+  }
+
+  ul.role-list li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--cyan);
+    font-weight: 700;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--blueprint-deep);
+    color: var(--paper);
+    text-align: center;
+    padding: 50px 24px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  footer .foot-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--cyan);
+    margin-bottom: 14px;
+    opacity: 0.8;
+  }
+
+  footer a {
+    color: var(--paper);
+    text-decoration: none;
+    border-bottom: 1px solid var(--cyan-dim);
+  }
+
+  footer a:hover { color: var(--cyan); }
+
+  footer p {
+    font-size: 13px;
+    color: rgba(244,241,234,0.6);
+    margin-top: 24px;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Mechanical Engineering — UIUC</div>
+    <h1>Jae Geun Hong</h1>
+    <p class="lede">Hardware design and fabrication, focused on how mechanical structure and mechanism geometry shape motion — from a centrifugal launch mechanism to a competition robot's autonomous arm.</p>
+    <div class="hero-links">
+      <a href="mailto:jghong040206@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/jaegeun-hong-9232a628b" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#spinlaunch">SpinLaunch ↓</a>
+      <a href="#vex">VEX Robotics ↓</a>
+      <a href="https://fldk0804.github.io/projects/#start" target="_blank" rel="noopener">Full SpinLaunch Site ↗</a>
+    </div>
+  </div>
+</header>
+
+<nav class="dim-nav">
+  <div class="dim-nav-inner">
+    <a href="#spinlaunch">01 — SpinLaunch</a>
+    <a href="#vex">02 — VEX Robotics</a>
+    <a href="#contact">03 — Contact</a>
+  </div>
+</nav>
+
+<!-- ================= SPINLAUNCH ================= -->
+<section class="sheet" id="spinlaunch">
+  <div class="sheet-label">Sheet 01 / Project</div>
+  <h2>SpinLaunch Scale Model</h2>
+  <p class="sub">KSEA MRC &amp; UIUC Engineering Open House (EOH) — a functional centrifugal launch mechanism, designed and built with a 6-person team.</p>
+
+  <div class="specs">
+    <div class="spec"><span class="num">6</span><span class="label">Team members</span></div>
+    <div class="spec"><span class="num">4</span><span class="label">Months</span></div>
+    <div class="spec"><span class="num">12</span><span class="label">3D-printed parts</span></div>
+    <div class="spec"><span class="num">~15m</span><span class="label">Launch distance</span></div>
+    <div class="spec"><span class="num">~4cm</span><span class="label">Projectile scale</span></div>
+  </div>
+
+  <div class="media-block">
+    <div class="media-frame" data-tag="FIG. 01 — KSEA MRC PRESENTATION">
+      <img src="assets/img/ksea-poster.jpg" alt="Team presenting SpinLaunch poster at KSEA MRC">
+    </div>
+    <p class="caption">Presented at KSEA MRC and UIUC EOH — explained SpinLaunch's working principle, launch calculations, and potential future applications to judges and other attendees, and answered their questions. Full team project site with demo video: <a href="https://fldk0804.github.io/projects/#start" target="_blank" rel="noopener" style="color:var(--brass);">fldk0804.github.io/projects</a></p>
+  </div>
+
+  <div class="sheet-label" style="margin-top:44px;">Fig. 03 — Motivation &amp; Benefit</div>
+  <p style="margin-bottom:16px; color:#3a4250;">Traditional rockets rely on fuel combustion to reach the upper atmosphere — expensive and environmentally costly. SpinLaunch's centrifuge-based approach stores energy mechanically instead, spinning a payload up to release speed before letting it go, removing the need for a chemical burn during that phase of launch. This model demonstrates that mechanism at a small, interactive scale, aimed at UIUC's Engineering Open House.</p>
+  <div class="specs" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+    <div class="spec"><span class="num" style="font-size:0.95rem;">Reduced Cost</span></div>
+    <div class="spec"><span class="num" style="font-size:0.95rem;">Lower Environmental Impact</span></div>
+    <div class="spec"><span class="num" style="font-size:0.95rem;">Higher Launch Frequency</span></div>
+    <div class="spec"><span class="num" style="font-size:0.95rem;">Versatility</span></div>
+    <div class="spec"><span class="num" style="font-size:0.95rem;">Safety</span></div>
+  </div>
+
+  <div class="sheet-label" style="margin-top:44px;">Fig. 04 — Mechanism Breakdown</div>
+  <div class="two-col" style="margin-bottom:30px;">
+    <div>
+      <h3 class="mono" style="font-size:0.95rem; color:var(--blueprint); margin-bottom:8px;">01 — Rotation</h3>
+      <p style="color:#3a4250; font-size:0.95rem;">A DC motor drives a rotating arm with the projectile mounted at its end. As the arm spins up, the projectile builds centrifugal acceleration; the faster it spins, the more kinetic energy it stores before release. Reaching a specific target trajectory means hitting a precalculated RPM, tuned through repeated test launches. The arm itself has to be rigid enough to survive the impact load at the moment of release, and it has to carry both the motor and the holding/release mechanism at its tip without flexing.</p>
+    </div>
+    <div>
+      <h3 class="mono" style="font-size:0.95rem; color:var(--blueprint); margin-bottom:8px;">02 — Holding-Release</h3>
+      <p style="color:#3a4250; font-size:0.95rem;">A claw fixed to a rod grips the projectile through the spin-up phase. The rod is mounted at the center of the rotating body. Once the arm hits its target rotational speed, a trigger mounted beside the firing tube drops and collides with the rod — the collision separates the rod from the claw, releasing the projectile. From that point, there's no more centripetal force acting on it, so by Newton's first law it flies off in a straight tangent line before gravity takes over and turns it into projectile motion.</p>
+    </div>
+  </div>
+
+  <div class="sheet-label">Fig. 05 — Landing Calculation</div>
+  <p style="color:#3a4250; font-size:0.95rem; margin-bottom:30px;">Once released, the projectile's velocity and launch angle determine where it lands — standard projectile-motion physics. We used that relationship to predict landing range, then built in a standard deviation to account for real-world uncertainty: wind, the projectile's own characteristics, ambient temperature, and (for the parachute-equipped version) parachute deployment timing.</p>
+
+  <ul class="role-list">
+    <li>Led the design of the main housing/structure and integrated subassemblies contributed by the rest of the team into the final build</li>
+    <li>Built using Fusion 360 for CAD and 3D printing for fabrication</li>
+    <li>Designed the holding-release mechanism: a claw grips the projectile until a hinge-actuated trigger releases it at the target rotational speed</li>
+  </ul>
+
+  <div class="two-col">
+    <div class="media-block">
+      <div class="media-frame" data-tag="VIDEO — MECHANISM DEMO">
+        <video controls muted playsinline poster="assets/img/mechanism-demo-poster.jpg">
+          <source src="assets/video/mechanism-demo.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="caption">Close-up of the launch mechanism: increasing DC motor output spins the central arm; pulling the rear hinge lifts the trigger, releasing the claw that holds the projectile.</p>
+    </div>
+
+    <div class="media-block">
+      <div class="media-frame" data-tag="VIDEO — EOH LAUNCH TEST">
+        <video controls muted playsinline poster="assets/img/eoh-test-poster.jpg">
+          <source src="assets/video/eoh-test.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="caption">Test run shot just before the EOH presentation — practicing hitting a target distance with the projectile.</p>
+    </div>
+  </div>
+
+  <div class="media-block">
+    <div class="media-frame" data-tag="VIDEO — PRECISION PRACTICE">
+      <video controls muted playsinline poster="assets/img/precision-practice-poster.jpg">
+        <source src="assets/video/precision-practice.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="caption">Mid-build test — aiming for a set target to check the precision of the release timing.</p>
+  </div>
+</section>
+
+<!-- ================= VEX ================= -->
+<section class="sheet" id="vex">
+  <div class="sheet-label">Sheet 02 / Project</div>
+  <h2>VEX Robotics — Team Leader</h2>
+  <p class="sub">Designed and built the robot that won the national competition, then advanced to an international VEX competition.</p>
+
+  <div class="specs">
+    <div class="spec"><span class="num">4</span><span class="label">Team members</span></div>
+    <div class="spec"><span class="num">1st</span><span class="label">National result</span></div>
+    <div class="spec"><span class="num">Int'l</span><span class="label">Competition reached</span></div>
+  </div>
+
+  <ul class="role-list">
+    <li>Designed the blueprint for and built the robot's chassis and claw mechanism with a 4-person team</li>
+    <li>Wrote the autonomous driving code — no manual control, fully pre-programmed pick-and-place routine</li>
+  </ul>
+
+  <div class="media-block">
+    <div class="media-frame" data-tag="VIDEO — AUTONOMOUS RUN">
+      <video controls muted playsinline poster="assets/img/vex-auto-poster.jpg">
+        <source src="assets/video/vex-auto.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="caption">Fully autonomous run — the robot's claw picks up an object and places it on the target goal using pre-programmed code, no manual driving.</p>
+  </div>
+
+  <div class="media-block">
+    <div class="media-frame" data-tag="FIG. 02 — TEAM BUILD PROCESS">
+      <img src="assets/img/vex-build-5.jpg" alt="Team assembling the VEX robot">
+    </div>
+    <p class="caption">The team assembling the robot — chain/sprocket drivetrain, mecanum wheels, and motor controller wiring.</p>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="foot-label">Sheet 03 / Contact</div>
+  <p><a href="mailto:jghong040206@gmail.com">jghong040206@gmail.com</a> &nbsp;·&nbsp;
+     <a href="https://linkedin.com/in/jaegeun-hong-9232a628b" target="_blank" rel="noopener">LinkedIn</a></p>
+  <p>Mechanical Engineering, University of Illinois Urbana-Champaign</p>
+</footer>
+
+</body>
+</html>
