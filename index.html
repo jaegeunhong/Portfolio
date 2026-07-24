@@ -21,6 +21,22 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
 
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(.16,.84,.44,1), transform 0.8s cubic-bezier(.16,.84,.44,1);
+    transition-delay: var(--d, 0s);
+  }
+
+  .reveal.in-view {
+    opacity: 1;
+    transform: none;
+  }
+
   body {
     background: var(--paper);
     color: var(--ink);
@@ -34,9 +50,38 @@
   .mono  { font-family: 'JetBrains Mono', monospace; }
 
   .wrap {
-    max-width: 780px;
+    max-width: 1240px;
     margin: 0 auto;
-    padding: 0 28px;
+    padding: 0 56px;
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .split.reverse { grid-template-columns: 0.95fr 1.05fr; }
+  .split.reverse .split-media { order: 2; }
+  .split.reverse .split-text { order: 1; }
+
+  .split-media img {
+    width: 100%;
+    display: block;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 900px) {
+    .wrap { padding: 0 24px; }
+    .split, .split.reverse {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .split.reverse .split-media,
+    .split.reverse .split-text,
+    .split .split-media,
+    .split .split-text { order: initial; }
   }
 
   /* ---------- NAV ---------- */
@@ -50,7 +95,7 @@
   }
 
   nav.top .wrap {
-    max-width: 900px;
+    max-width: 1240px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -96,7 +141,34 @@
 
   /* ---------- HERO ---------- */
   header.hero {
-    padding: 110px 0 70px;
+    padding: 90px 0 70px;
+  }
+
+  header.hero .split { align-items: start; }
+
+  header.hero .hero-visual {
+    position: relative;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  header.hero .hero-visual img {
+    width: 100%;
+    display: block;
+    filter: grayscale(15%);
+  }
+
+  header.hero .hero-visual .tag {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: rgba(30,28,25,0.82);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    padding: 6px 12px;
+    border-radius: 2px;
   }
 
   header.hero .eyebrow {
@@ -144,8 +216,7 @@
 
   /* ---------- SECTION RHYTHM ---------- */
   section.block {
-    padding: 76px 0;
-    border-top: 1px solid var(--line);
+    padding: 48px 0 90px;
   }
 
   section.block .kicker {
@@ -231,6 +302,13 @@
 
   figure.media.full figcaption { max-width: 100%; }
 
+  .caption-note {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin-top: 12px;
+    line-height: 1.6;
+  }
+
   .video-pair {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -287,20 +365,20 @@
 
   /* ---------- STL VIEWER ---------- */
   .viewer-section {
-    padding: 76px 0;
-    border-top: 1px solid var(--line);
+    padding: 48px 0 90px;
     background: #EDE9E0;
+    min-height: 100%;
   }
 
   .viewer-wrap {
-    max-width: 900px;
+    max-width: 1240px;
     margin: 0 auto;
-    padding: 0 28px;
+    padding: 0 56px;
   }
 
   #stl-viewer {
     width: 100%;
-    height: 460px;
+    height: 540px;
     background: linear-gradient(180deg, #F7F4EE, #E4E0D6);
     border-radius: 3px;
     position: relative;
@@ -337,108 +415,159 @@
     #stl-viewer { height: 320px; }
   }
 
-  /* ---------- FOOTER ---------- */
+  /* ---------- FOOTER / CONTACT PAGE ---------- */
   footer {
-    padding: 60px 0 80px;
-    border-top: 1px solid var(--line);
+    padding: 0;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+  }
+
+  footer .wrap { width: 100%; }
+
+  footer .serif {
+    font-size: clamp(2rem, 5vw, 3rem) !important;
+    margin-bottom: 18px !important;
   }
 
   footer p {
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     color: var(--ink-soft);
   }
 
   footer .links {
-    margin-top: 10px;
+    margin-top: 26px;
     display: flex;
-    gap: 18px;
+    gap: 24px;
+    font-size: 1.05rem;
   }
 
   footer .links a {
     color: var(--ink);
     text-decoration: none;
     border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
   }
+
+  /* ---------- PAGE SWITCHING ---------- */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  .page.active.anim-in {
+    animation: pageIn 0.6s cubic-bezier(.16,.84,.44,1);
+  }
+
+  @keyframes pageIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .page.active.anim-in { animation: none; }
+  }
+
+  .brand-link { text-decoration: none; }
+
+  .page-hint {
+    margin-top: 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent-soft);
+    letter-spacing: 0.03em;
+  }
+
+  nav.top .links a.current { color: var(--ink); }
+  nav.top .links a.current::after { width: 100%; }
 </style>
 </head>
 <body>
 
 <nav class="top">
   <div class="wrap">
-    <div class="brand">Jae Geun Hong</div>
+    <a href="#home" data-page="home" class="brand-link"><div class="brand">Jae Geun Hong</div></a>
     <div class="links">
-      <a href="#spinlaunch">SpinLaunch</a>
-      <a href="#model">3D Model</a>
-      <a href="#vex">VEX Robotics</a>
-      <a href="#contact">Contact</a>
+      <a href="#spinlaunch" data-page="spinlaunch">SpinLaunch</a>
+      <a href="#model" data-page="model">3D Model</a>
+      <a href="#vex" data-page="vex">VEX Robotics</a>
+      <a href="#contact" data-page="contact">Contact</a>
     </div>
   </div>
 </nav>
 
-<div class="wrap">
-  <header class="hero">
-    <div class="eyebrow">Mechanical Engineering — University of Illinois Urbana-Champaign</div>
-    <h1 class="serif">Hardware &amp; mechanism<br>design.</h1>
-    <p class="bio">I'm a mechanical engineering student interested in how structure and mechanism geometry shape motion — the kind of design where a CAD decision changes how a machine actually moves. Most of what's here started as a hands-on question: how do you build the thing, not just model it.</p>
-    <p class="bio">Outside coursework, I spend most of my project time on CAD-driven mechanism design, 3D-printed fabrication, and embedded control — currently getting into legged and jumping robot locomotion in particular.</p>
-    <div class="contact-row">
-      <a href="mailto:jghong040206@gmail.com">Email</a>
-      <a href="https://linkedin.com/in/jaegeun-hong-9232a628b" target="_blank" rel="noopener">LinkedIn</a>
+<div class="wrap page-inner">
+  <header class="hero page active" id="home">
+    <div class="split">
+      <div class="split-text">
+        <div class="eyebrow reveal hero-el" style="--d:0s;">Mechanical Engineering — University of Illinois Urbana-Champaign</div>
+        <h1 class="serif reveal hero-el" style="--d:0.1s;">Hardware &amp; mechanism<br>design.</h1>
+        <p class="bio reveal hero-el" style="--d:0.22s;">I'm a mechanical engineering student interested in how structure and mechanism geometry shape motion — the kind of design where a CAD decision changes how a machine actually moves. Most of what's here started as a hands-on question: how do you build the thing, not just model it.</p>
+        <p class="bio reveal hero-el" style="--d:0.3s;">Outside coursework, I spend most of my project time on CAD-driven mechanism design, 3D-printed fabrication, and embedded control — currently getting into legged and jumping robot locomotion in particular.</p>
+        <div class="contact-row reveal hero-el" style="--d:0.38s;">
+          <a href="mailto:jghong040206@gmail.com">Email</a>
+          <a href="https://linkedin.com/in/jaegeun-hong-9232a628b" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+        <div class="page-hint reveal hero-el" style="--d:0.46s;">↳ Browse with the nav above, or the arrow keys</div>
+      </div>
+      <div class="split-media hero-visual reveal hero-el" style="--d:0.15s;">
+        <img src="assets/img/ksea-poster.jpg" alt="Presenting the SpinLaunch project at KSEA MRC">
+        <span class="tag">SpinLaunch — KSEA MRC, 2024</span>
+      </div>
     </div>
   </header>
 </div>
 
 <!-- ================= SPINLAUNCH ================= -->
-<section class="block" id="spinlaunch">
+<section class="block page" id="spinlaunch">
   <div class="wrap">
-    <div class="kicker">Project — 01</div>
-    <h2 class="serif">SpinLaunch Scale Model</h2>
-    <p class="desc">KSEA MRC &amp; UIUC Engineering Open House — a functional centrifugal launch mechanism, designed and built with a 6-person team.</p>
+    <div class="kicker reveal">Project — 01</div>
+    <h2 class="serif reveal" style="--d:0.08s;">SpinLaunch Scale Model</h2>
+    <p class="desc reveal" style="--d:0.14s;">KSEA MRC &amp; UIUC Engineering Open House — a functional centrifugal launch mechanism, designed and built with a 6-person team.</p>
 
     <div class="stats">
-      <div class="stat"><span class="n">6</span><span class="l">Team</span></div>
-      <div class="stat"><span class="n">4</span><span class="l">Months</span></div>
-      <div class="stat"><span class="n">12</span><span class="l">Printed parts</span></div>
-      <div class="stat"><span class="n">~15m</span><span class="l">Launch distance</span></div>
-      <div class="stat"><span class="n">~4cm</span><span class="l">Projectile</span></div>
+      <div class="stat reveal" style="--d:0.00s;"><span class="n" data-count="6">0</span><span class="l">Team</span></div>
+      <div class="stat reveal" style="--d:0.05s;"><span class="n" data-count="4">0</span><span class="l">Months</span></div>
+      <div class="stat reveal" style="--d:0.10s;"><span class="n" data-count="12">0</span><span class="l">Printed parts</span></div>
+      <div class="stat reveal" style="--d:0.15s;"><span class="n">~15m</span><span class="l">Launch distance</span></div>
+      <div class="stat reveal" style="--d:0.20s;"><span class="n">~4cm</span><span class="l">Projectile</span></div>
     </div>
 
-    <figure class="media full">
-      <img src="assets/img/ksea-poster.jpg" alt="Team presenting SpinLaunch poster at KSEA MRC">
-      <figcaption>Presented at KSEA MRC and UIUC EOH — explained SpinLaunch's working principle, launch calculations, and potential future applications to judges and other attendees, and answered their questions.</figcaption>
-    </figure>
-
-    <h3 class="serif" style="font-size:1.2rem; margin-bottom:14px;">Motivation &amp; benefit</h3>
-    <p class="desc" style="margin-bottom:26px;">Traditional rockets rely on fuel combustion to reach the upper atmosphere — expensive and environmentally costly. SpinLaunch's centrifuge-based approach stores energy mechanically instead, spinning a payload up to release speed before letting it go, removing the need for a chemical burn during that phase of launch. This model demonstrates that mechanism at a small, interactive scale, built for EOH.</p>
+    <div class="split reverse" style="margin-bottom:50px;">
+      <div class="split-media reveal">
+        <img src="assets/img/ksea-poster.jpg" alt="Team presenting SpinLaunch poster at KSEA MRC">
+        <p class="caption-note">Presenting SpinLaunch at KSEA MRC, 2024.</p>
+      </div>
+      <div class="split-text reveal" style="--d:0.1s;">
+        <h3 class="serif" style="font-size:1.2rem; margin-bottom:14px;">Motivation &amp; benefit</h3>
+        <p style="color:var(--ink-soft); margin-bottom:16px;">Traditional rockets rely on fuel combustion to reach the upper atmosphere — expensive and environmentally costly. SpinLaunch's centrifuge-based approach stores energy mechanically instead, spinning a payload up to release speed before letting it go, removing the need for a chemical burn during that phase of launch. This model demonstrates that mechanism at a small, interactive scale, built for EOH.</p>
+        <p style="color:var(--ink-soft);">Presented at KSEA MRC and UIUC EOH — explained the working principle, launch calculations, and potential future applications to judges and other attendees, and answered their questions.</p>
+      </div>
+    </div>
 
     <div class="two-col">
-      <div>
+      <div class="reveal" style="--d:0s;">
         <h3 class="serif">Rotation</h3>
         <p>A DC motor drives a rotating arm with the projectile mounted at its end. As the arm spins up, the projectile builds centrifugal acceleration — reaching a specific target trajectory means hitting a precalculated RPM, tuned through repeated test launches. The arm has to be rigid enough to survive the impact load at release, and carry the holding/release mechanism at its tip without flexing.</p>
       </div>
-      <div>
+      <div class="reveal" style="--d:0.1s;">
         <h3 class="serif">Holding-Release</h3>
         <p>A claw fixed to a rod grips the projectile through spin-up. Once the arm hits its target speed, a trigger beside the firing tube drops and collides with the rod — separating it from the claw and releasing the projectile. From that point there's no more centripetal force acting on it, so by Newton's first law it flies off in a straight tangent line before gravity turns it into projectile motion.</p>
       </div>
     </div>
 
-    <h3 class="serif" style="font-size:1.2rem; margin-bottom:14px;">Landing calculation</h3>
-    <p class="desc" style="margin-bottom:44px;">Once released, the projectile's velocity and launch angle determine where it lands — standard projectile-motion physics. We used that relationship to predict landing range, then built in a standard deviation to account for real-world uncertainty: wind, the projectile's own characteristics, ambient temperature, and parachute deployment timing.</p>
-
     <ul class="roles">
-      <li>Led the design of the main housing/structure and integrated subassemblies contributed by the rest of the team into the final build</li>
-      <li>Built using Fusion 360 for CAD and 3D printing for fabrication</li>
-      <li>Designed the holding-release mechanism described above</li>
+      <li class="reveal" style="--d:0.00s;">Led the design of the main housing/structure and integrated subassemblies contributed by the rest of the team into the final build</li>
+      <li class="reveal" style="--d:0.06s;">Built using Fusion 360 for CAD and 3D printing for fabrication</li>
+      <li class="reveal" style="--d:0.12s;">Designed the holding-release mechanism described above</li>
     </ul>
 
-    <div class="video-pair">
-      <figure class="media">
+    <div class="video-pair reveal">
+      <figure class="media reveal">
         <video controls muted playsinline poster="assets/img/mechanism-demo-poster.jpg">
           <source src="assets/video/mechanism-demo.mp4" type="video/mp4">
         </video>
         <figcaption>Close-up of the launch mechanism — increasing DC motor output spins the central arm; pulling the rear hinge lifts the trigger, releasing the claw holding the projectile.</figcaption>
       </figure>
-      <figure class="media">
+      <figure class="media reveal">
         <video controls muted playsinline poster="assets/img/eoh-test-poster.jpg">
           <source src="assets/video/eoh-test.mp4" type="video/mp4">
         </video>
@@ -446,63 +575,72 @@
       </figure>
     </div>
 
-    <figure class="media">
-      <video controls muted playsinline poster="assets/img/precision-practice-poster.jpg">
-        <source src="assets/video/precision-practice.mp4" type="video/mp4">
-      </video>
-      <figcaption>Mid-build test — aiming for a set target to check the precision of the release timing.</figcaption>
-    </figure>
+    <div class="split reverse" style="margin-top:50px;">
+      <div class="split-media reveal">
+        <video controls muted playsinline poster="assets/img/precision-practice-poster.jpg" style="width:100%; border-radius:2px; display:block;">
+          <source src="assets/video/precision-practice.mp4" type="video/mp4">
+        </video>
+        <p class="caption-note">Mid-build test — aiming for a set target to check release-timing precision.</p>
+      </div>
+      <div class="split-text reveal" style="--d:0.1s;">
+        <h3 class="serif" style="font-size:1.2rem; margin-bottom:14px;">Landing calculation</h3>
+        <p style="color:var(--ink-soft);">Once released, the projectile's velocity and launch angle determine where it lands — standard projectile-motion physics. We used that relationship to predict landing range, then built in a standard deviation to account for real-world uncertainty: wind, the projectile's own characteristics, ambient temperature, and parachute deployment timing.</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ================= 3D MODEL VIEWER ================= -->
-<section class="viewer-section" id="model">
+<section class="viewer-section page" id="model">
   <div class="viewer-wrap">
-    <div class="kicker">Interactive</div>
-    <h2 class="serif">SpinLaunch — 3D Model</h2>
-    <p class="desc">The assembly CAD model, viewable directly here. Drag to rotate, scroll to zoom.</p>
-    <div id="stl-viewer">
+    <div class="kicker reveal">Interactive</div>
+    <h2 class="serif reveal" style="--d:0.08s;">SpinLaunch — 3D Model</h2>
+    <p class="desc reveal" style="--d:0.14s;">The assembly CAD model, viewable directly here. Drag to rotate, scroll to zoom.</p>
+    <div id="stl-viewer" class="reveal">
       <div id="stl-loading">LOADING MODEL…</div>
     </div>
-    <div class="viewer-hint">DRAG TO ROTATE · SCROLL TO ZOOM</div>
+    <div class="viewer-hint reveal" style="--d:0.1s;">DRAG TO ROTATE · SCROLL TO ZOOM</div>
   </div>
 </section>
 
 <!-- ================= VEX ================= -->
-<section class="block" id="vex">
+<section class="block page" id="vex">
   <div class="wrap">
-    <div class="kicker">Project — 02</div>
-    <h2 class="serif">VEX Robotics — Team Leader</h2>
-    <p class="desc">Designed and built the robot that won the national competition, then advanced to an international VEX competition.</p>
+    <div class="kicker reveal">Project — 02</div>
+    <h2 class="serif reveal" style="--d:0.08s;">VEX Robotics — Team Leader</h2>
+    <p class="desc reveal" style="--d:0.14s;">Designed and built the robot that won the national competition, then advanced to an international VEX competition.</p>
 
     <div class="stats">
-      <div class="stat"><span class="n">4</span><span class="l">Team</span></div>
-      <div class="stat"><span class="n">1st</span><span class="l">National result</span></div>
-      <div class="stat"><span class="n">Int'l</span><span class="l">Competition reached</span></div>
+      <div class="stat reveal" style="--d:0.00s;"><span class="n" data-count="4">0</span><span class="l">Team</span></div>
+      <div class="stat reveal" style="--d:0.05s;"><span class="n">1st</span><span class="l">National result</span></div>
+      <div class="stat reveal" style="--d:0.10s;"><span class="n">Int'l</span><span class="l">Competition reached</span></div>
     </div>
 
-    <ul class="roles">
-      <li>Designed the blueprint for and built the robot's chassis and claw mechanism with a 4-person team</li>
-      <li>Wrote the autonomous driving code — no manual control, fully pre-programmed pick-and-place routine</li>
-    </ul>
+    <div class="split" style="margin-bottom:46px;">
+      <div class="split-text reveal">
+        <ul class="roles" style="margin-bottom:0;">
+          <li class="reveal" style="--d:0.00s;">Designed the blueprint for and built the robot's chassis and claw mechanism with a 4-person team</li>
+          <li class="reveal" style="--d:0.06s;">Wrote the autonomous driving code — no manual control, fully pre-programmed pick-and-place routine</li>
+        </ul>
+      </div>
+      <div class="split-media reveal" style="--d:0.1s;">
+        <img src="assets/img/vex-build-5.jpg" alt="Team assembling the VEX robot">
+        <p class="caption-note">Assembling the chassis — chain/sprocket drivetrain, mecanum wheels, and motor controller wiring.</p>
+      </div>
+    </div>
 
-    <figure class="media">
+    <figure class="media reveal">
       <video controls muted playsinline poster="assets/img/vex-auto-poster.jpg">
         <source src="assets/video/vex-auto.mp4" type="video/mp4">
       </video>
       <figcaption>Fully autonomous run — the robot's claw picks up an object and places it on the target goal using pre-programmed code, no manual driving.</figcaption>
     </figure>
-
-    <figure class="media full">
-      <img src="assets/img/vex-build-5.jpg" alt="Team assembling the VEX robot">
-      <figcaption>The team assembling the robot — chain/sprocket drivetrain, mecanum wheels, and motor controller wiring.</figcaption>
-    </figure>
   </div>
 </section>
 
-<footer id="contact">
+<footer class="page" id="contact">
   <div class="wrap">
-    <p class="serif" style="font-size:1.3rem; margin-bottom:6px;">Get in touch</p>
+    <p class="serif reveal" style="font-size:1.3rem; margin-bottom:6px;">Get in touch</p>
     <p>Mechanical Engineering, University of Illinois Urbana-Champaign</p>
     <div class="links">
       <a href="mailto:jghong040206@gmail.com">jghong040206@gmail.com</a>
@@ -524,73 +662,195 @@
   import { STLLoader } from 'three/addons/loaders/STLLoader.js';
   import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-  const container = document.getElementById('stl-viewer');
-  const loadingEl = document.getElementById('stl-loading');
+  let viewerInitialized = false;
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(40, container.clientWidth / container.clientHeight, 0.1, 5000);
+  window.initSTLViewer = function () {
+    if (viewerInitialized) return;
+    viewerInitialized = true;
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(container.clientWidth, container.clientHeight);
-  container.appendChild(renderer.domElement);
+    const container = document.getElementById('stl-viewer');
+    const loadingEl = document.getElementById('stl-loading');
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.7));
-  const key = new THREE.DirectionalLight(0xffffff, 1.1);
-  key.position.set(1, 1.5, 1);
-  scene.add(key);
-  const fill = new THREE.DirectionalLight(0xffffff, 0.5);
-  fill.position.set(-1, -0.5, -1);
-  scene.add(fill);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(40, container.clientWidth / container.clientHeight, 0.1, 5000);
 
-  const controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
-  controls.dampingFactor = 0.08;
-  controls.autoRotate = true;
-  controls.autoRotateSpeed = 1.1;
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    container.appendChild(renderer.domElement);
 
-  const isMobile = window.matchMedia('(max-width: 640px)').matches;
-  const modelPath = isMobile ? 'assets/model/assembly-mobile.stl' : 'assets/model/assembly.stl';
+    scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+    const key = new THREE.DirectionalLight(0xffffff, 1.1);
+    key.position.set(1, 1.5, 1);
+    scene.add(key);
+    const fill = new THREE.DirectionalLight(0xffffff, 0.5);
+    fill.position.set(-1, -0.5, -1);
+    scene.add(fill);
 
-  const loader = new STLLoader();
-  loader.load(modelPath, (geometry) => {
-    geometry.computeVertexNormals();
-    geometry.center();
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.08;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 1.1;
 
-    const material = new THREE.MeshStandardMaterial({
-      color: 0x2B3A4A,
-      metalness: 0.15,
-      roughness: 0.55
+    const isMobile = window.matchMedia('(max-width: 640px)').matches;
+    const modelPath = isMobile ? 'assets/model/assembly-mobile.stl' : 'assets/model/assembly.stl';
+
+    const loader = new STLLoader();
+    loader.load(modelPath, (geometry) => {
+      geometry.computeVertexNormals();
+      geometry.center();
+
+      const material = new THREE.MeshStandardMaterial({
+        color: 0x2B3A4A,
+        metalness: 0.15,
+        roughness: 0.55
+      });
+      const mesh = new THREE.Mesh(geometry, material);
+      scene.add(mesh);
+
+      // Fit camera to object
+      geometry.computeBoundingSphere();
+      const radius = geometry.boundingSphere.radius;
+      camera.position.set(radius * 1.6, radius * 1.2, radius * 1.8);
+      controls.target.set(0, 0, 0);
+      controls.update();
+
+      loadingEl.style.display = 'none';
+    }, undefined, (err) => {
+      loadingEl.textContent = 'MODEL FAILED TO LOAD';
+      console.error(err);
     });
-    const mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
 
-    // Fit camera to object
-    geometry.computeBoundingSphere();
-    const radius = geometry.boundingSphere.radius;
-    camera.position.set(radius * 1.6, radius * 1.2, radius * 1.8);
-    controls.target.set(0, 0, 0);
-    controls.update();
+    controls.addEventListener('start', () => { controls.autoRotate = false; });
 
-    loadingEl.style.display = 'none';
-  }, undefined, (err) => {
-    loadingEl.textContent = 'MODEL FAILED TO LOAD';
-    console.error(err);
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    });
+  };
+
+  // If the page loads directly on #model, init immediately.
+  if (location.hash.replace('#', '') === 'model') {
+    window.initSTLViewer();
+  }
+</script>
+
+<script>
+  // Hero elements animate in on load
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.hero-el').forEach(el => {
+      requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('in-view')));
+    });
   });
 
-  controls.addEventListener('start', () => { controls.autoRotate = false; });
+  // Everything else reveals on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        if (entry.target.dataset.count) animateCount(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
-  function animate() {
-    requestAnimationFrame(animate);
-    controls.update();
-    renderer.render(scene, camera);
+  document.querySelectorAll('.reveal:not(.hero-el)').forEach(el => io.observe(el));
+
+  function animateCount(el) {
+    const target = parseInt(el.dataset.count, 10);
+    const duration = 900;
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(eased * target);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
   }
-  animate();
 
-  window.addEventListener('resize', () => {
-    camera.aspect = container.clientWidth / container.clientHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(container.clientWidth, container.clientHeight);
+  // ---------- PAGE NAVIGATION ----------
+  const PAGES = ['home', 'spinlaunch', 'model', 'vex', 'contact'];
+  const navLinks = document.querySelectorAll('nav.top [data-page]');
+
+  function revealVisible(pageEl) {
+    // Immediately reveal any .reveal elements already within the viewport
+    // on this page (elements further down still animate in via scroll).
+    pageEl.querySelectorAll('.reveal:not(.in-view)').forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight) {
+        el.classList.add('in-view');
+        if (el.dataset.count) animateCount(el);
+      }
+    });
+  }
+
+  function goToPage(id, { push = true } = {}) {
+    if (!PAGES.includes(id)) return;
+    const current = document.querySelector('.page.active');
+    const next = document.getElementById(id);
+    if (!next || current === next) return;
+
+    if (current) current.classList.remove('active', 'anim-in');
+    next.classList.add('active');
+    void next.offsetWidth; // restart animation
+    next.classList.add('anim-in');
+
+    if (id === 'model' && window.initSTLViewer) window.initSTLViewer();
+
+    window.scrollTo({ top: 0, behavior: 'instant' in document.documentElement.style ? 'instant' : 'auto' });
+
+    navLinks.forEach(a => a.classList.toggle('current', a.dataset.page === id));
+
+    if (push) history.pushState({ page: id }, '', '#' + id);
+
+    requestAnimationFrame(() => revealVisible(next));
+  }
+
+  navLinks.forEach(a => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      goToPage(a.dataset.page);
+    });
+  });
+
+  window.addEventListener('popstate', (e) => {
+    const id = (e.state && e.state.page) || location.hash.replace('#', '') || 'home';
+    goToPage(id, { push: false });
+  });
+
+  window.addEventListener('keydown', (e) => {
+    const tag = (document.activeElement || {}).tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
+    const idx = PAGES.indexOf(document.querySelector('.page.active').id);
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      goToPage(PAGES[Math.min(idx + 1, PAGES.length - 1)]);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      goToPage(PAGES[Math.max(idx - 1, 0)]);
+    }
+  });
+
+  // Initial load: honor URL hash if present
+  window.addEventListener('DOMContentLoaded', () => {
+    const initial = location.hash.replace('#', '');
+    if (initial && PAGES.includes(initial) && initial !== 'home') {
+      goToPage(initial, { push: false });
+    } else {
+      navLinks.forEach(a => a.classList.toggle('current', a.dataset.page === 'home'));
+      revealVisible(document.getElementById('home'));
+    }
   });
 </script>
 
