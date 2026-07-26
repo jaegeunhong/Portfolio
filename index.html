@@ -50,9 +50,9 @@
   .mono  { font-family: 'JetBrains Mono', monospace; }
 
   .wrap {
-    max-width: 1240px;
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 0 56px;
+    padding: 0 clamp(24px, 5vw, 72px);
   }
 
   .split {
@@ -95,7 +95,7 @@
   }
 
   nav.top .wrap {
-    max-width: 1240px;
+    max-width: 1440px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -238,6 +238,11 @@
     flex-wrap: wrap;
     gap: 40px;
     margin: 6px 0 46px;
+  }
+
+  .section-divider {
+    border-top: 1px solid var(--line);
+    margin: 8px 0 28px;
   }
 
   .stat {
@@ -583,15 +588,14 @@
 <section class="block page" id="vex">
   <div class="wrap">
     <h2 class="serif reveal" style="--d:0.08s;">VEX Robotics — Team Leader</h2>
-    <p class="desc reveal" style="--d:0.14s;">Designed and built the robot that won the national competition, then advanced to an international VEX competition.</p>
+    <p class="desc reveal" style="--d:0.14s; margin-bottom:0;">Designed and built the robot that won the national competition, then advanced to an international VEX competition.</p>
 
-    <div class="stats">
-      <div class="stat reveal" style="--d:0.00s;"><span class="n">1st</span><span class="l">National result</span></div>
-      <div class="stat reveal" style="--d:0.05s;"><span class="n">Int'l</span><span class="l">Competition reached</span></div>
-    </div>
-
-    <div class="split" style="margin-bottom:46px;">
+    <div class="split" style="margin: 34px 0 40px;">
       <div class="split-text reveal">
+        <div class="stats" style="margin-bottom:34px;">
+          <div class="stat reveal" style="--d:0.00s;"><span class="n">1st</span><span class="l">National result</span></div>
+          <div class="stat reveal" style="--d:0.05s;"><span class="n">Int'l</span><span class="l">Competition reached</span></div>
+        </div>
         <ul class="roles" style="margin-bottom:0;">
           <li class="reveal" style="--d:0.00s;">Designed the blueprint for and built the robot's chassis and claw mechanism with a 4-person team</li>
           <li class="reveal" style="--d:0.06s;">Wrote the autonomous driving code — no manual control, fully pre-programmed pick-and-place routine</li>
@@ -603,11 +607,14 @@
       </div>
     </div>
 
+    <div class="section-divider"></div>
+    <div class="kicker reveal">Video</div>
+
     <figure class="media reveal">
-      <video controls muted playsinline poster="assets/img/vex-auto-poster.jpg" style="max-width:640px;">
+      <video controls muted playsinline poster="assets/img/vex-auto-poster.jpg" style="max-width:820px;">
         <source src="assets/video/vex-auto.mp4" type="video/mp4">
       </video>
-      <figcaption style="max-width:640px; margin-left:auto; margin-right:auto; text-align:center;">Fully autonomous run — the robot's claw picks up an object and places it on the target goal using pre-programmed code, no manual driving.</figcaption>
+      <figcaption style="max-width:820px; margin-left:auto; margin-right:auto; text-align:center;">Fully autonomous run — the robot's claw picks up an object and places it on the target goal using pre-programmed code, no manual driving.</figcaption>
     </figure>
   </div>
 </section>
