@@ -59,7 +59,7 @@
     display: grid;
     grid-template-columns: 1.05fr 0.95fr;
     gap: 64px;
-    align-items: center;
+    align-items: start;
   }
 
   .split.reverse { grid-template-columns: 0.95fr 1.05fr; }
@@ -105,8 +105,10 @@
 
   nav.top .brand {
     font-family: 'Fraunces', serif;
-    font-size: 1rem;
-    letter-spacing: 0.01em;
+    font-weight: 600;
+    font-size: 1.5rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
   }
 
   nav.top .links {
@@ -144,7 +146,7 @@
     padding: 90px 0 70px;
   }
 
-  header.hero .split { align-items: start; }
+  header.hero .split { align-items: center; }
 
   header.hero .hero-visual {
     position: relative;
@@ -156,19 +158,6 @@
     width: 100%;
     display: block;
     filter: grayscale(15%);
-  }
-
-  header.hero .hero-visual .tag {
-    position: absolute;
-    bottom: 16px;
-    left: 16px;
-    background: rgba(30,28,25,0.82);
-    color: var(--paper);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.06em;
-    padding: 6px 12px;
-    border-radius: 2px;
   }
 
   header.hero .eyebrow {
@@ -257,10 +246,11 @@
 
   .stat .n {
     font-family: 'Fraunces', serif;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: 500;
     color: var(--ink);
     display: block;
+    white-space: nowrap;
   }
 
   .stat .l {
@@ -363,22 +353,17 @@
     .two-col { grid-template-columns: 1fr; }
   }
 
-  /* ---------- STL VIEWER ---------- */
-  .viewer-section {
-    padding: 48px 0 90px;
+  /* ---------- STL VIEWER (embedded in SpinLaunch page) ---------- */
+  .model-embed {
     background: #EDE9E0;
-    min-height: 100%;
-  }
-
-  .viewer-wrap {
-    max-width: 1240px;
-    margin: 0 auto;
-    padding: 0 56px;
+    border-radius: 6px;
+    padding: 40px 44px 36px;
+    margin: 6px 0 46px;
   }
 
   #stl-viewer {
     width: 100%;
-    height: 540px;
+    height: 480px;
     background: linear-gradient(180deg, #F7F4EE, #E4E0D6);
     border-radius: 3px;
     position: relative;
@@ -412,6 +397,7 @@
   }
 
   @media (max-width: 640px) {
+    .model-embed { padding: 26px 20px 22px; }
     #stl-viewer { height: 320px; }
   }
 
@@ -466,7 +452,7 @@
     .page.active.anim-in { animation: none; }
   }
 
-  .brand-link { text-decoration: none; }
+  .brand-link { text-decoration: none; color: var(--ink); }
 
   .page-hint {
     margin-top: 32px;
@@ -487,7 +473,6 @@
     <a href="#home" data-page="home" class="brand-link"><div class="brand">Jae Geun Hong</div></a>
     <div class="links">
       <a href="#spinlaunch" data-page="spinlaunch">SpinLaunch</a>
-      <a href="#model" data-page="model">3D Model</a>
       <a href="#vex" data-page="vex">VEX Robotics</a>
       <a href="#contact" data-page="contact">Contact</a>
     </div>
@@ -502,15 +487,10 @@
         <h1 class="serif reveal hero-el" style="--d:0.1s;">Hardware &amp; mechanism<br>design.</h1>
         <p class="bio reveal hero-el" style="--d:0.22s;">I'm a mechanical engineering student interested in how structure and mechanism geometry shape motion — the kind of design where a CAD decision changes how a machine actually moves. Most of what's here started as a hands-on question: how do you build the thing, not just model it.</p>
         <p class="bio reveal hero-el" style="--d:0.3s;">Outside coursework, I spend most of my project time on CAD-driven mechanism design, 3D-printed fabrication, and embedded control — currently getting into legged and jumping robot locomotion in particular.</p>
-        <div class="contact-row reveal hero-el" style="--d:0.38s;">
-          <a href="mailto:jghong040206@gmail.com">Email</a>
-          <a href="https://linkedin.com/in/jaegeun-hong-9232a628b" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-        <div class="page-hint reveal hero-el" style="--d:0.46s;">↳ Browse with the nav above, or the arrow keys</div>
+        <div class="page-hint reveal hero-el" style="--d:0.38s;">↳ Browse with the nav above, or the arrow keys</div>
       </div>
       <div class="split-media hero-visual reveal hero-el" style="--d:0.15s;">
-        <img src="assets/img/ksea-poster.jpg" alt="Presenting the SpinLaunch project at KSEA MRC">
-        <span class="tag">SpinLaunch — KSEA MRC, 2024</span>
+        <img src="assets/img/profile.jpg" alt="Jae Geun Hong">
       </div>
     </div>
   </header>
@@ -519,14 +499,13 @@
 <!-- ================= SPINLAUNCH ================= -->
 <section class="block page" id="spinlaunch">
   <div class="wrap">
-    <div class="kicker reveal">Project — 01</div>
     <h2 class="serif reveal" style="--d:0.08s;">SpinLaunch Scale Model</h2>
     <p class="desc reveal" style="--d:0.14s;">KSEA MRC &amp; UIUC Engineering Open House — a functional centrifugal launch mechanism, designed and built with a 6-person team.</p>
 
     <div class="stats">
-      <div class="stat reveal" style="--d:0.00s;"><span class="n" data-count="6">0</span><span class="l">Team</span></div>
-      <div class="stat reveal" style="--d:0.05s;"><span class="n" data-count="4">0</span><span class="l">Months</span></div>
-      <div class="stat reveal" style="--d:0.10s;"><span class="n" data-count="12">0</span><span class="l">Printed parts</span></div>
+      <div class="stat reveal" style="--d:0.00s;"><span class="n">6 members</span></div>
+      <div class="stat reveal" style="--d:0.05s;"><span class="n">4 months</span></div>
+      <div class="stat reveal" style="--d:0.10s;"><span class="n">12 parts</span></div>
       <div class="stat reveal" style="--d:0.15s;"><span class="n">~15m</span><span class="l">Launch distance</span></div>
       <div class="stat reveal" style="--d:0.20s;"><span class="n">~4cm</span><span class="l">Projectile</span></div>
     </div>
@@ -552,6 +531,16 @@
         <h3 class="serif">Holding-Release</h3>
         <p>A claw fixed to a rod grips the projectile through spin-up. Once the arm hits its target speed, a trigger beside the firing tube drops and collides with the rod — separating it from the claw and releasing the projectile. From that point there's no more centripetal force acting on it, so by Newton's first law it flies off in a straight tangent line before gravity turns it into projectile motion.</p>
       </div>
+    </div>
+
+    <div class="model-embed reveal">
+      <div class="kicker">Interactive</div>
+      <h3 class="serif" style="font-size:1.2rem; margin-bottom:12px;">3D Model</h3>
+      <p style="color:var(--ink-soft); margin-bottom:22px;">The assembly CAD model, viewable directly here. Drag to rotate, scroll to zoom.</p>
+      <div id="stl-viewer">
+        <div id="stl-loading">LOADING MODEL…</div>
+      </div>
+      <div class="viewer-hint">DRAG TO ROTATE · SCROLL TO ZOOM</div>
     </div>
 
     <ul class="roles">
@@ -590,30 +579,15 @@
   </div>
 </section>
 
-<!-- ================= 3D MODEL VIEWER ================= -->
-<section class="viewer-section page" id="model">
-  <div class="viewer-wrap">
-    <div class="kicker reveal">Interactive</div>
-    <h2 class="serif reveal" style="--d:0.08s;">SpinLaunch — 3D Model</h2>
-    <p class="desc reveal" style="--d:0.14s;">The assembly CAD model, viewable directly here. Drag to rotate, scroll to zoom.</p>
-    <div id="stl-viewer" class="reveal">
-      <div id="stl-loading">LOADING MODEL…</div>
-    </div>
-    <div class="viewer-hint reveal" style="--d:0.1s;">DRAG TO ROTATE · SCROLL TO ZOOM</div>
-  </div>
-</section>
-
 <!-- ================= VEX ================= -->
 <section class="block page" id="vex">
   <div class="wrap">
-    <div class="kicker reveal">Project — 02</div>
     <h2 class="serif reveal" style="--d:0.08s;">VEX Robotics — Team Leader</h2>
     <p class="desc reveal" style="--d:0.14s;">Designed and built the robot that won the national competition, then advanced to an international VEX competition.</p>
 
     <div class="stats">
-      <div class="stat reveal" style="--d:0.00s;"><span class="n" data-count="4">0</span><span class="l">Team</span></div>
-      <div class="stat reveal" style="--d:0.05s;"><span class="n">1st</span><span class="l">National result</span></div>
-      <div class="stat reveal" style="--d:0.10s;"><span class="n">Int'l</span><span class="l">Competition reached</span></div>
+      <div class="stat reveal" style="--d:0.00s;"><span class="n">1st</span><span class="l">National result</span></div>
+      <div class="stat reveal" style="--d:0.05s;"><span class="n">Int'l</span><span class="l">Competition reached</span></div>
     </div>
 
     <div class="split" style="margin-bottom:46px;">
@@ -630,10 +604,10 @@
     </div>
 
     <figure class="media reveal">
-      <video controls muted playsinline poster="assets/img/vex-auto-poster.jpg">
+      <video controls muted playsinline poster="assets/img/vex-auto-poster.jpg" style="max-width:640px;">
         <source src="assets/video/vex-auto.mp4" type="video/mp4">
       </video>
-      <figcaption>Fully autonomous run — the robot's claw picks up an object and places it on the target goal using pre-programmed code, no manual driving.</figcaption>
+      <figcaption style="max-width:640px; margin-left:auto; margin-right:auto; text-align:center;">Fully autonomous run — the robot's claw picks up an object and places it on the target goal using pre-programmed code, no manual driving.</figcaption>
     </figure>
   </div>
 </section>
@@ -738,8 +712,8 @@
     });
   };
 
-  // If the page loads directly on #model, init immediately.
-  if (location.hash.replace('#', '') === 'model') {
+  // If the page loads directly on #spinlaunch, init immediately (viewer lives on that page now).
+  if (location.hash.replace('#', '') === 'spinlaunch') {
     window.initSTLViewer();
   }
 </script>
@@ -779,7 +753,7 @@
   }
 
   // ---------- PAGE NAVIGATION ----------
-  const PAGES = ['home', 'spinlaunch', 'model', 'vex', 'contact'];
+  const PAGES = ['home', 'spinlaunch', 'vex', 'contact'];
   const navLinks = document.querySelectorAll('nav.top [data-page]');
 
   function revealVisible(pageEl) {
@@ -805,7 +779,7 @@
     void next.offsetWidth; // restart animation
     next.classList.add('anim-in');
 
-    if (id === 'model' && window.initSTLViewer) window.initSTLViewer();
+    if (id === 'spinlaunch' && window.initSTLViewer) window.initSTLViewer();
 
     window.scrollTo({ top: 0, behavior: 'instant' in document.documentElement.style ? 'instant' : 'auto' });
 
