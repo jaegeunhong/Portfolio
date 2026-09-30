@@ -22,13 +22,15 @@ assets/
 3. **Selected work** (`#work`) — 프로젝트 카드 2개 (클릭하면 해당 케이스 스터디로 이동)
 4. **SpinLaunch** (`#spinlaunch`) — 수치, 동기/역할, 작동 원리 애니메이션, 궤적 차트, 3D 모델, 테스트 영상
 5. **VEX Robotics** (`#vex`) — 수치, 역할, 조립 사진, 자율주행 영상
-6. **Contact** (`#contact`) — 이메일(복사 버튼), LinkedIn
+6. **Arduino RC Car** (`#arduino-car`) — 개인 프로젝트(Ongoing): CAD 뷰 5장, 스펙 시트, 진행 상황, 센서 스캔 애니메이션, 엔지니어링 노트
+7. **Contact** (`#contact`) — 이메일(복사 버튼), LinkedIn
 
 ## 자주 할 수정
 - **텍스트 수정**: `index.html`에서 해당 문장을 찾아 바로 고치면 됨
 - **포인트 색상 변경**: `assets/css/style.css` 맨 위 `--accent` 값 변경
 - **숫자(통계) 수정**: `<span data-count="15">15</span>`처럼 `data-count`와 안의 숫자를 같이 바꾸기
 - **영상 추가**: `.log-grid` 안의 `<figure class="clip-card">` 블록 하나를 복사해서 `data-src`, `poster`, `<source>` 경로와 설명만 바꾸기
+- **Arduino 카 진행 상황 변경**: `#arduino-car` 안의 `.progress-steps`에서 `is-done` / `is-current` 클래스와 `Done` / `In progress` / `Next` 표시를 옮기면 됨. 완성되면 `Ongoing` 배지(`<span class="status">`) 두 곳을 지우거나 문구를 바꾸기
 - **프로젝트 추가**: `<article class="case" id="...">` 블록을 통째로 복사 → 내용 교체, 그리고 `#work` 섹션에 `work-card` 하나, 상단 `nav`에 링크 하나 추가
 
 ## 배포

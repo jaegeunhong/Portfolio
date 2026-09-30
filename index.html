@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#0a0b0d">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Jae Geun Hong — Hardware &amp; Mechanism Design">
-<meta property="og:description" content="Mechanical engineering student at UIUC. SpinLaunch scale model, VEX Robotics and more.">
+<meta property="og:description" content="Mechanical engineering student at UIUC. SpinLaunch scale model, VEX Robotics and an Arduino RC car in progress.">
 <meta property="og:url" content="https://jaegeunhong.github.io/Portfolio/">
 <meta property="og:image" content="https://jaegeunhong.github.io/Portfolio/assets/img/profile.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230a0b0d'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%23ff6a2b' stroke-width='5'/%3E%3Ccircle cx='49' cy='32' r='5' fill='%23eceef1'/%3E%3C/svg%3E">
@@ -48,6 +48,7 @@
       <a href="#about" data-nav="about">About</a>
       <a href="#spinlaunch" data-nav="spinlaunch">SpinLaunch</a>
       <a href="#vex" data-nav="vex">VEX Robotics</a>
+      <a href="#arduino-car" data-nav="arduino-car">Arduino Car</a>
     </nav>
 
     <a class="btn btn-sm btn-primary header-cta" href="#contact" data-nav="contact">Get in touch</a>
@@ -63,8 +64,9 @@
     <a href="#about" style="--i:0"><span>01</span>About</a>
     <a href="#spinlaunch" style="--i:1"><span>02</span>SpinLaunch</a>
     <a href="#vex" style="--i:2"><span>03</span>VEX Robotics</a>
-    <a href="#contact" style="--i:3"><span>04</span>Contact</a>
-    <p class="mobile-menu-foot" style="--i:4">jghong040206@gmail.com</p>
+    <a href="#arduino-car" style="--i:3"><span>04</span>Arduino Car</a>
+    <a href="#contact" style="--i:4"><span>05</span>Contact</a>
+    <p class="mobile-menu-foot" style="--i:5">jghong040206@gmail.com</p>
   </nav>
 </div>
 
@@ -138,6 +140,8 @@
         <li>Embedded Control</li>
         <li>Autonomous Programming</li>
         <li>Rapid Prototyping</li>
+        <li>Suspension Geometry</li>
+        <li>Arduino</li>
         <li>Projectile Analysis</li>
         <li>Team Leadership</li>
       </ul>
@@ -148,6 +152,8 @@
         <li>Embedded Control</li>
         <li>Autonomous Programming</li>
         <li>Rapid Prototyping</li>
+        <li>Suspension Geometry</li>
+        <li>Arduino</li>
         <li>Projectile Analysis</li>
         <li>Team Leadership</li>
       </ul>
@@ -167,7 +173,7 @@
 
           <dl class="facts">
             <div><dt>Studying</dt><dd>Mechanical Engineering<br>University of Illinois Urbana-Champaign</dd></div>
-            <div><dt>Toolkit</dt><dd>Fusion 360 · 3D printing · DC motor control · Autonomous code</dd></div>
+            <div><dt>Toolkit</dt><dd>Fusion 360 · 3D printing · Arduino · DC motor control · Autonomous code</dd></div>
             <div><dt>Currently</dt><dd>Legged &amp; jumping robot locomotion</dd></div>
           </dl>
         </div>
@@ -210,7 +216,7 @@
           <p class="section-label" data-reveal>Selected work</p>
           <h2 class="section-title" data-reveal>From CAD model <em>to working machine.</em></h2>
         </div>
-        <p class="section-note" data-reveal>Two team builds — each taken from CAD and fabrication through testing, then in front of judges.</p>
+        <p class="section-note" data-reveal>Two team builds taken from CAD all the way to judges — and a personal project that is still on the bench.</p>
       </div>
 
       <div class="work-grid" data-stagger>
@@ -234,8 +240,21 @@
           <div class="work-body">
             <div class="work-top"><span>02</span><span>Team leader</span></div>
             <h3>VEX Robotics</h3>
-            <p>Designed and built the robot that won the national competition, then advanced to an international VEX competition.</p>
+            <p>As team leader, designed and built the robot that won the national competition.</p>
             <ul class="tags"><li>Chassis &amp; claw</li><li>Autonomous code</li><li>1st nationally</li><li>Team of 4</li></ul>
+          </div>
+          <span class="work-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+
+        <a class="work-card work-card--wide" href="#arduino-car" data-reveal>
+          <div class="work-media work-media--cad">
+            <img src="assets/img/rc-iso.webp" alt="Isometric CAD render of the Arduino RC car chassis" width="1600" height="1000" loading="lazy">
+          </div>
+          <div class="work-body">
+            <div class="work-top"><span>03 · Personal project</span><span class="status"><i aria-hidden="true"></i>Ongoing</span></div>
+            <h3>Arduino RC Car</h3>
+            <p>An obstacle-avoiding RC car designed in Fusion 360 — Ackermann steering, double-wishbone front suspension and a gear-driven rear axle, built around an Arduino Uno.</p>
+            <ul class="tags"><li>Fusion 360 · Python API</li><li>Arduino</li><li>Suspension design</li><li>3D printing</li></ul>
           </div>
           <span class="work-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </a>
@@ -498,13 +517,12 @@
         <div class="case-intro">
           <p class="kicker" data-reveal>Case study · Team leader</p>
           <h2 class="case-title" data-reveal>VEX <em>Robotics</em></h2>
-          <p class="case-lead" data-reveal>As team leader, I designed and built the robot that won the national competition — then took it on to an international VEX competition.</p>
+          <p class="case-lead" data-reveal>As team leader, I designed and built the robot that won the national competition — from the chassis and claw blueprint to the autonomous code.</p>
         </div>
       </header>
 
-      <div class="stats stats--3" data-stagger>
+      <div class="stats stats--compact" data-stagger>
         <div class="stat" data-reveal><span class="stat-n"><span data-count="1">1</span><small>st</small></span><span class="stat-l">National result</span></div>
-        <div class="stat" data-reveal><span class="stat-n">Int'l</span><span class="stat-l">Competition reached</span></div>
         <div class="stat" data-reveal><span class="stat-n"><span data-count="4">4</span></span><span class="stat-l">Team members</span></div>
       </div>
 
@@ -542,6 +560,223 @@
           </button>
           <figcaption>Fully autonomous run — the claw picks up an object and places it on the target goal using pre-programmed code, with no manual driving.</figcaption>
         </figure>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- ================= CASE 03 — ARDUINO RC CAR ================= -->
+  <article class="case" id="arduino-car">
+    <div class="container">
+
+      <header class="case-head">
+        <span class="case-num" aria-hidden="true" data-reveal>03</span>
+        <div class="case-intro">
+          <p class="kicker kicker--status" data-reveal>Personal project · Fusion 360 · Arduino <span class="status"><i aria-hidden="true"></i>Ongoing</span></p>
+          <h2 class="case-title" data-reveal>Arduino <em>RC car</em></h2>
+          <p class="case-lead" data-reveal>An obstacle-avoiding RC car I'm designing from the ground up — servo Ackermann steering, an unequal-length double-wishbone front end with coil-over shocks, and a gear-driven rear axle, all generated from a parametric Fusion 360 script and verified in CAD before printing.</p>
+        </div>
+      </header>
+
+      <div class="stats" data-stagger>
+        <div class="stat" data-reveal><span class="stat-n"><span data-count="185">185</span><small>mm</small></span><span class="stat-l">Wheelbase</span></div>
+        <div class="stat" data-reveal><span class="stat-n"><small>±</small><span data-count="28">28</span><small>°</small></span><span class="stat-l">Steering lock</span></div>
+        <div class="stat" data-reveal><span class="stat-n"><span data-count="15">15</span><small>mm</small></span><span class="stat-l">Wheel travel</span></div>
+        <div class="stat" data-reveal><span class="stat-n"><span data-count="0">0</span></span><span class="stat-l">CAD interferences</span></div>
+        <div class="stat" data-reveal><span class="stat-n"><small>~</small><span data-count="800">800</span><small>g</small></span><span class="stat-l">Est. weight</span></div>
+      </div>
+
+      <!-- CAD views -->
+      <div class="cad-grid">
+        <figure class="cad-view cad-view--hero" data-reveal="clip">
+          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/img/rc-iso.webp" data-caption="Isometric view — sensor bumper, front suspension, electronics deck and rear drive." aria-label="View larger: isometric CAD view">
+            <img src="assets/img/rc-iso.webp" alt="Isometric CAD view of the RC car with front sensor bumper, suspension and electronics deck" width="1600" height="1000" loading="lazy">
+          </button>
+          <figcaption><span>Iso</span>Full assembly</figcaption>
+        </figure>
+        <figure class="cad-view" data-reveal="clip">
+          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/img/rc-front.webp" data-caption="Front view — ultrasonic sensors across the bumper and the angled coil-over shocks." aria-label="View larger: front CAD view">
+            <img src="assets/img/rc-front.webp" alt="Front CAD view showing ultrasonic sensors in the bumper and angled coil-over shocks" width="1600" height="1000" loading="lazy">
+          </button>
+          <figcaption><span>Front</span>Sensor bumper &amp; shocks</figcaption>
+        </figure>
+        <figure class="cad-view" data-reveal="clip">
+          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/img/rc-side.webp" data-caption="Side view — drivetrain and battery on the lower plate, electronics on the upper deck." aria-label="View larger: side CAD view">
+            <img src="assets/img/rc-side.webp" alt="Side CAD view showing the two-deck layout" width="1380" height="862" loading="lazy">
+          </button>
+          <figcaption><span>Side</span>Two-deck layout</figcaption>
+        </figure>
+        <figure class="cad-view cad-view--half" data-reveal="clip">
+          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/img/rc-top.webp" data-caption="Top view — electronics deck, steering linkage and double-wishbone front end." aria-label="View larger: top CAD view">
+            <img src="assets/img/rc-top.webp" alt="Top CAD view showing the electronics deck and front suspension" width="1600" height="1000" loading="lazy">
+          </button>
+          <figcaption><span>Top</span>Deck &amp; steering linkage</figcaption>
+        </figure>
+        <figure class="cad-view cad-view--half" data-reveal="clip">
+          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/img/rc-dark.webp" data-caption="Alternate render of the chassis in a dark finish." aria-label="View larger: dark render">
+            <img src="assets/img/rc-dark.webp" alt="Dark-finish render of the RC car chassis" width="900" height="563" loading="lazy">
+          </button>
+          <figcaption><span>Render</span>Dark finish</figcaption>
+        </figure>
+      </div>
+
+      <!-- Overview + spec sheet -->
+      <div class="case-cols">
+        <div class="case-block" data-reveal>
+          <h3 class="block-title"><span>What</span>The idea</h3>
+          <p>A small autonomous car that reads its surroundings with ultrasonic sensors and steers around obstacles — and a chance to design real vehicle geometry instead of a toy chassis: camber gain, kingpin inclination, roll center and spring rates, all worked out and checked in CAD.</p>
+          <p>The whole car is generated by a Fusion 360 Python script: one run builds 13 parts and 27 bodies, and every dimension lives in a single parameters file, so a change to the wheelbase or wheel size ripples through the entire model.</p>
+
+          <h3 class="block-title block-title--gap"><span>Status</span>Where it stands</h3>
+          <ol class="progress-steps">
+            <li class="is-done"><strong>Design &amp; verification <em class="pill pill--done">Done</em></strong><span>Parametric model, BOM, drawing set, interference check and suspension motion study</span></li>
+            <li class="is-current"><strong>Print &amp; assemble <em class="pill pill--now">In progress</em></strong><span>PETG/PLA parts, heat-set inserts, drivetrain and suspension build-up</span></li>
+            <li><strong>Obstacle-avoidance code <em class="pill">Next</em></strong><span>Sequenced sensor scan, steering and motor control on the Arduino</span></li>
+          </ol>
+        </div>
+
+        <div class="panel spec-panel" data-reveal data-spotlight>
+          <div class="panel-bar"><span class="live"><i aria-hidden="true"></i>Spec sheet</span><span>Design v4</span></div>
+          <dl class="spec">
+            <div><dt>Wheelbase / track</dt><dd>185 / 152 mm</dd></div>
+            <div><dt>Weight</dt><dd>~800 g (est.)</dd></div>
+            <div><dt>Top speed</dt><dd>~1 m/s (calc.)</dd></div>
+            <div><dt>Controller</dt><dd>Arduino Uno R3 + L298N driver</dd></div>
+            <div><dt>Power</dt><dd>3× 18650 (11.1 V) · LM2596 → 5 V</dd></div>
+            <div><dt>Drive</dt><dd>JGA25-370 gear motor, 1:1 spur gears, live rear axle</dd></div>
+            <div><dt>Steering</dt><dd>Micro servo, Ackermann linkage, ±28°</dd></div>
+            <div><dt>Suspension</dt><dd>Double wishbone + coil-over, 0.78 N/mm springs</dd></div>
+            <div><dt>Sensors</dt><dd>4× HC-SR04 ultrasonic</dd></div>
+            <div><dt>Fabrication</dt><dd>FDM — PETG for load paths, PLA elsewhere</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <!-- Subsystems -->
+      <div class="how">
+        <div class="sub-head">
+          <p class="kicker" data-reveal>How it's built</p>
+          <h3 class="sub-title" data-reveal>Four subsystems, <em>one parametric model.</em></h3>
+        </div>
+
+        <div class="focus-grid focus-grid--tight" data-stagger>
+          <article class="card" data-reveal>
+            <span class="card-num">01</span>
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/><path d="M12 3v6.5M4.2 16.5l5.6-3.2M19.8 16.5l-5.6-3.2"/></svg>
+            </span>
+            <h3>Steering &amp; suspension</h3>
+            <p>Servo-driven Ackermann steering on an unequal-length double-wishbone front end with coil-over shocks — 7.84° kingpin inclination, −1.5° static camber, 6° caster and a roll center 4.5 mm above the ground.</p>
+          </article>
+          <article class="card" data-reveal>
+            <span class="card-num">02</span>
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="8" cy="12" r="5"/><circle cx="17.5" cy="12" r="3.5"/><path d="M8 7V5M8 19v-2M3 12H1.5M13 12h1"/></svg>
+            </span>
+            <h3>Rear drivetrain</h3>
+            <p>A 6 V, 280 rpm JGA25-370 gear motor turns a ø5 mm live rear axle on four MR105ZZ bearings through a 1:1, module-0.8 spur-gear pair.</p>
+          </article>
+          <article class="card" data-reveal>
+            <span class="card-num">03</span>
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3 3 7.5l9 4.5 9-4.5L12 3Z"/><path d="m3 12 9 4.5 9-4.5"/><path d="m3 16.5 9 4.5 9-4.5"/></svg>
+            </span>
+            <h3>Print-ready structure</h3>
+            <p>Two decks — drivetrain below, electronics above on M3 standoffs. Every part fits a 220 × 220 bed, and the A-arms are modeled flat and rotated about their hinge axis so they print without supports.</p>
+          </article>
+        </div>
+
+        <div class="how-row sonar-row">
+          <div class="panel sonar-panel" data-reveal data-spotlight>
+            <div class="panel-bar">
+              <span class="live"><i aria-hidden="true"></i>Sensor scan · top view</span>
+              <span>Shown 10× slower</span>
+            </div>
+            <svg class="sonar" viewBox="40 20 400 260" role="img" aria-label="Animated top view of the car firing its four ultrasonic sensors one at a time: front centre, front left, front right, then rear." data-sonar>
+              <g class="sn-waves">
+                <path class="sn-wave" data-wave="0" d=""/>
+                <path class="sn-wave" data-wave="1" d=""/>
+                <path class="sn-wave" data-wave="2" d=""/>
+                <path class="sn-wave" data-wave="3" d=""/>
+              </g>
+              <g class="sn-car">
+                <path class="sn-arm" d="M285 112 V93 M285 188 V207 M189 112 V93 M189 188 V207"/>
+                <rect class="sn-tire" x="266" y="84" width="38" height="17" rx="5"/>
+                <rect class="sn-tire" x="266" y="199" width="38" height="17" rx="5"/>
+                <rect class="sn-tire" x="170" y="84" width="38" height="17" rx="5"/>
+                <rect class="sn-tire" x="170" y="199" width="38" height="17" rx="5"/>
+                <rect class="sn-plate" x="150" y="112" width="162" height="76" rx="10"/>
+                <rect class="sn-deck" x="158" y="120" width="92" height="60" rx="6"/>
+                <path class="sn-bumper" d="M314 106 L330 128 V172 L314 194"/>
+                <path class="sn-bumper" d="M146 136 V164"/>
+                <text class="sn-deck-label" x="204" y="154" text-anchor="middle">UNO</text>
+                <text class="sn-dir-label" x="282" y="154" text-anchor="middle">FWD →</text>
+              </g>
+              <g class="sn-sensors">
+                <circle class="sn-sensor" data-sensor="0" data-dir="0" cx="330" cy="150" r="5"/>
+                <circle class="sn-sensor" data-sensor="1" data-dir="-36" cx="322" cy="117" r="5"/>
+                <circle class="sn-sensor" data-sensor="2" data-dir="36" cx="322" cy="183" r="5"/>
+                <circle class="sn-sensor" data-sensor="3" data-dir="180" cx="146" cy="150" r="5"/>
+              </g>
+            </svg>
+            <div class="demo-foot">
+              <ol class="demo-steps sonar-steps" aria-hidden="true">
+                <li data-sonar-step="0">S1 front</li><li data-sonar-step="1">S2 left</li><li data-sonar-step="2">S3 right</li><li data-sonar-step="3">S4 rear</li>
+              </ol>
+            </div>
+          </div>
+
+          <ol class="steps">
+            <li class="step" data-reveal>
+              <span class="step-n">04</span>
+              <div>
+                <h4>Electronics &amp; sensing</h4>
+                <p>An Arduino Uno and an L298N motor driver sit on the upper deck, powered by three 18650 cells. A separate LM2596 buck converter feeds 5 V to the servo and sensors — the servo's 700 mA+ start-up current would otherwise brown out the Uno's own regulator and reset the board.</p>
+              </div>
+            </li>
+            <li class="step" data-reveal>
+              <span class="step-n">↳</span>
+              <div>
+                <h4>One sensor at a time</h4>
+                <p>Four HC-SR04 sensors fired together would hear each other's echoes, so they are triggered round-robin: 60 ms per sensor, a full scan every ~240 ms. At ~1 m/s the car covers over 20 cm between scans — so the avoidance logic needs at least 40 cm of warning.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Engineering notes -->
+      <div class="how">
+        <div class="sub-head sub-head--split">
+          <div>
+            <p class="kicker" data-reveal>Engineering notes</p>
+            <h3 class="sub-title" data-reveal>What the CAD <em>caught early.</em></h3>
+          </div>
+          <p class="section-note" data-reveal>Problems that calculation alone missed — found by checking the model before printing anything.</p>
+        </div>
+
+        <ol class="notes" data-stagger>
+          <li class="note" data-reveal>
+            <span class="note-n">01</span>
+            <h4>Designed my own shocks</h4>
+            <p>Off-the-shelf shocks were 60 mm eye-to-eye with ø5/ø6 bores against a 50 mm, M3 design. Raising the shock tower to fit them would have dropped its bending safety factor from 2.8 to below 2.0, so the shock body and rod became printed PETG parts and only the spring is bought — 0.78 N/mm, sized from an 800 g car, 45 % front weight and a 0.57 motion ratio.</p>
+          </li>
+          <li class="note" data-reveal>
+            <span class="note-n">02</span>
+            <h4>Real part CAD changed the layout</h4>
+            <p>Modeled from datasheet dimensions, the assembly showed zero interferences. Dropping in the manufacturers' CAD exposed problems in 7 of 8 parts — a 65.9 mm motor instead of 71, ø68 wheels instead of ø65, a deeper servo case — so the rear carrier, axle height and servo pocket were all reworked.</p>
+          </li>
+          <li class="note" data-reveal>
+            <span class="note-n">03</span>
+            <h4>Motion study over the full travel</h4>
+            <p>Solved the four-bar suspension linkage at 9 travel positions and measured the clearance between 3 moving and 7 fixed parts at each one. Past −7.5 mm of droop the lower arm reaches the chassis plate, so travel is set to +10 mm bump / −5 mm droop, with a camber gain of −0.095°/mm.</p>
+          </li>
+          <li class="note" data-reveal>
+            <span class="note-n">04</span>
+            <h4>One gear mesh, one part</h4>
+            <p>The 19.2 mm gear center distance loses its backlash if it drifts by just 0.3 mm. Putting the axle bearing bores and the motor face on a single printed carrier means print accuracy alone holds the mesh — no separate motor mount to misalign.</p>
+          </li>
+        </ol>
       </div>
 
     </div>
