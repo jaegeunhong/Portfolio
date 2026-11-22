@@ -9,6 +9,9 @@
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
 
+  // Page sections, in order (header scroll-spy + arrow-key navigation)
+  const SECTION_IDS = ['home', 'about', 'work', 'iem', 'eoh-wheel', 'spinlaunch', 'vex', 'contact'];
+
   // Callbacks run once per animation frame while scrolling
   const scrollTasks = [];
 
@@ -86,7 +89,7 @@
     const nav = document.querySelector('.nav');
     const indicator = nav && nav.querySelector('.nav-indicator');
     const links = Array.from(document.querySelectorAll('[data-nav]'));
-    const sections = ['home', 'about', 'work', 'spinlaunch', 'vex', 'arduino-car', 'contact']
+    const sections = SECTION_IDS
       .map((id) => document.getElementById(id))
       .filter(Boolean);
 
@@ -573,62 +576,40 @@
     io.observe(svg);
   }
 
-  /* ---------- Arduino car: round-robin ultrasonic scan ---------- */
-  function initSonar() {
-    const svg = document.querySelector('[data-sonar]');
-    if (!svg) return;
-    const sensors = Array.from(svg.querySelectorAll('[data-sensor]'));
-    const waves = Array.from(svg.querySelectorAll('[data-wave]'));
-    const chips = svg.closest('.panel').querySelectorAll('[data-sonar-step]');
-    // Facing direction of each sensor (degrees, SVG coordinates)
-    const dirs = sensors.map((el) => Number(el.dataset.dir));
-    const HALF = 15 * Math.PI / 180;
-    const R0 = 10, R1 = 140;
-    const SLOT = 600; // 60 ms per sensor, shown 10x slower
+  /* ---------- Arrow keys: ← / → jump to the previous / next section ---------- */
+  function initKeys() {
+    const sections = SECTION_IDS.map((id) => document.getElementById(id)).filter(Boolean);
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey || e.defaultPrevented) return;
+      const t = e.target;
+      if (t.closest && t.closest('input, textarea, select, [contenteditable], video, [data-model-viewer]')) return;
+      if (document.body.classList.contains('menu-open') || document.querySelector('.lightbox[open]')) return;
 
-    const wedge = (i, r) => {
-      const cx = +sensors[i].getAttribute('cx'), cy = +sensors[i].getAttribute('cy');
-      const a = dirs[i] * Math.PI / 180;
-      const x0 = cx + r * Math.cos(a - HALF), y0 = cy + r * Math.sin(a - HALF);
-      const x1 = cx + r * Math.cos(a + HALF), y1 = cy + r * Math.sin(a + HALF);
-      return `M${cx} ${cy} L${x0.toFixed(1)} ${y0.toFixed(1)} A${r.toFixed(1)} ${r.toFixed(1)} 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)} Z`;
-    };
+      // Current section = last one whose top is above 40% of the viewport
+      const line = window.innerHeight * 0.4;
+      let idx = 0;
+      sections.forEach((s, i) => { if (s.getBoundingClientRect().top <= line) idx = i; });
+      const next = e.key === 'ArrowRight' ? Math.min(idx + 1, sections.length - 1) : Math.max(idx - 1, 0);
+      if (next === idx) return;
+      e.preventDefault();
+      sections[next].scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    });
+  }
 
-    let active = -1;
-    const setActive = (i) => {
-      if (i === active) return;
-      active = i;
-      sensors.forEach((s, k) => s.classList.toggle('is-on', k === i));
-      chips.forEach((c) => c.classList.toggle('is-on', Number(c.dataset.sonarStep) === i));
-    };
-
-    if (reduceMotion) {
-      waves.forEach((w, i) => { w.setAttribute('d', wedge(i, 100)); w.style.opacity = '0.5'; });
-      sensors.forEach((s) => s.classList.add('is-on'));
-      return;
-    }
-
-    let running = false, raf = 0, start = 0;
-    const loop = (now) => {
-      const t = now - start;
-      const i = Math.floor(t / SLOT) % sensors.length;
-      const p = (t % SLOT) / SLOT;
-      setActive(i);
-      waves.forEach((w, k) => {
-        if (k !== i) { w.style.opacity = '0'; return; }
-        const eased = 1 - Math.pow(1 - p, 2);
-        w.setAttribute('d', wedge(k, R0 + (R1 - R0) * eased));
-        w.style.opacity = (1 - p).toFixed(2);
-      });
-      if (running) raf = requestAnimationFrame(loop);
-    };
-
-    const io = new IntersectionObserver((entries) => {
-      const visible = entries.some((e) => e.isIntersecting);
-      if (visible && !running) { running = true; start = performance.now(); raf = requestAnimationFrame(loop); }
-      else if (!visible && running) { running = false; cancelAnimationFrame(raf); }
-    }, { threshold: 0.2 });
-    io.observe(svg);
+  /* ---------- Image placeholders: until a file exists, show what goes there ---------- */
+  function initPlaceholders() {
+    document.querySelectorAll('img[data-ph]').forEach((img) => {
+      const box = img.closest('.shot') || img.parentElement;
+      const mark = () => {
+        box.classList.add('is-missing');
+        box.dataset.phText = `Image placeholder — ${img.dataset.ph}\n${img.getAttribute('src')}`;
+        const btn = img.closest('button');
+        if (btn) btn.disabled = true;
+      };
+      if (img.complete && img.naturalWidth === 0 && img.getAttribute('src')) mark();
+      else img.addEventListener('error', mark, { once: true });
+    });
   }
 
   /* ---------- Scroll loop ---------- */
@@ -659,7 +640,8 @@
   initCopy();
   initSpinDemo();
   initTrajectory();
-  initSonar();
+  initKeys();
+  initPlaceholders();
   initYear();
   initScrollLoop();
 })();
