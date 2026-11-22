@@ -280,6 +280,12 @@ body::before {
 }
 .mobile-menu a span { font-family: var(--font-mono); font-size: .8rem; letter-spacing: .06em; color: var(--accent); }
 .mobile-menu-foot { margin-top: 28px; font-family: var(--font-mono); font-size: .85rem; color: var(--text-2); }
+.mobile-menu .mobile-menu-foot a {
+  display: inline; padding: 0; border: 0;
+  font-size: inherit; font-weight: 400; letter-spacing: inherit; line-height: 2;
+  opacity: 1; transform: none; transition: color .3s;
+}
+.mobile-menu .mobile-menu-foot a:hover { color: var(--text); }
 
 /* =========================================================
    HERO

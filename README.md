@@ -64,5 +64,5 @@ npx gltfpack -i raw.glb -o model.glb -cc   # meshopt 압축 (SpinLaunch: 1.7 MB 
 `main` 브랜치에 push하면 GitHub Pages가 1~2분 안에 자동으로 반영함 (Settings → Pages → Deploy from a branch → `main` / root).
 
 ## 참고
-- 휴대폰 번호는 공개 사이트 특성상 일부러 뺐음
+- 연락처(이메일·전화)는 Contact 섹션과 모바일 메뉴 하단에 있음
 - 애니메이션은 OS의 "동작 줄이기(Reduce motion)" 설정을 켜면 자동으로 꺼짐
