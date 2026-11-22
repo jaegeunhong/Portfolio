@@ -28,28 +28,22 @@ assets/
 7. **VEX Robotics** (`#vex`)
 8. **Contact** (`#contact`) — 이메일(복사 버튼), LinkedIn, 이력서
 
-## 아직 넣어야 할 파일 (없으면 사이트에 점선 "Image placeholder" 박스로 표시됨)
-파일 이름만 맞춰서 넣으면 자동으로 보입니다. 이미지는 가로 약 1600px, webp/jpg, 300 KB 이하 권장.
-
+## 이미지·모델 파일
 | 경로 | 내용 |
 |---|---|
 | `assets/Jae_Geun_Hong_Resume_Cohesive.pdf` | 이력서 (헤더·히어로·연락처·모바일 메뉴의 Resume 버튼) |
-| `assets/iem/grip-render.webp` | 그립 렌더, 3/4 뷰 (프로젝트 카드에도 사용) |
-| `assets/iem/grip-on-baseplate.webp` | 카본 베이스플레이트 가장자리에 끼운 모습 |
-| `assets/iem/grip-section.webp` | 그립 + 베이스플레이트 단면 |
-| `assets/iem/grip-printed.webp` | ASA 출력물 사진 |
-| `assets/iem/grip-finished.webp` | 알칸타라 커버 씌운 사진 |
-| `assets/iem/faceplate-fasteners.webp` | 페이스플레이트 체결부 (스탠드오프, 실링 와셔, 인서트) |
-| `assets/iem/finger-groove-wip.webp` | 핑거 그루브 재설계 (진행 중) |
-| `assets/eoh/section-rigid.webp` | section_rigid.png |
-| `assets/eoh/section-soft.webp` | section_soft_d8.png |
-| `assets/eoh/core-iso.webp` | core_iso.png (프로젝트 카드에도 사용) |
-| `assets/eoh/shuttle-cord-exit.webp` | shuttle_cord_exit.png |
-| `assets/model/eoh-wheel-rigid.glb` | 휠 rigid 상태 3D |
-| `assets/model/eoh-wheel-soft.glb` | 휠 soft 상태 3D |
-| `assets/model/eoh-car.glb` | 차량 전체 3D |
+| `assets/iem/01-…12-*.webp` | IEM 스크린샷 12장 (갤러리 순서 = 파일 번호). 원본 해상도가 약 300px라서 고해상도 원본이 있으면 같은 이름으로 교체 |
+| `assets/img/eoh-wheel-render.webp` | 휠 3D 모델 스냅샷 (프로젝트 카드) |
+| `assets/model/eoh-wheel-rigid.glb` · `eoh-wheel-soft.glb` | 휠 rigid / soft(d8) — STEP에서 변환 |
+| `assets/model/eoh-car-rigid.glb` · `eoh-car-soft.glb` | 차량 rigid / soft — STEP에서 변환 |
 
-IEM CAD 파일(STL/STEP)과 내부 문서는 올리지 않습니다 — 스크린샷/렌더만.
+IEM CAD 파일(STL/STEP)과 내부 문서는 올리지 않습니다 — 스크린샷/렌더만. EOH STEP 원본도 저장소에는 넣지 않고 압축한 GLB만 둡니다.
+
+### STEP → GLB (EOH 모델)
+OpenCascade(`cadquery-ocp`)로 메시화 → trimesh로 GLB → gltfpack 압축. 차량은 Z-up이라 Y-up으로 회전, 휠 파일은 이미 Y-up.
+```
+npx gltfpack -i raw.glb -o model.glb -cc -si 0.5   # 휠 (약 160 KB), 차량은 -si 0.3 (약 280 KB)
+```
 
 ### 3D 모델 압축 (STL → GLB)
 ```

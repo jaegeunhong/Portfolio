@@ -1287,6 +1287,38 @@ body::before {
 .cad-view--third { grid-column: span 4; }
 .cad-view--wip { margin-top: 28px; }
 
+/* CAD screenshot gallery (small source images, shown near native size) */
+.cad-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.cad-tile .media-btn {
+  display: block;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f8f8f8;
+  border: 1px solid var(--line);
+}
+.cad-tile img { width: 100%; height: 100%; object-fit: contain; padding: 6px; transition: transform 1s var(--ease); }
+.cad-tile:hover img { transform: scale(1.04); }
+.cad-tile figcaption {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  padding: 10px 2px 0;
+  font-size: .86rem;
+  color: var(--text-2);
+}
+.cad-tile figcaption span { font-family: var(--font-mono); font-size: .7rem; color: var(--accent); }
+.work-media--fit { background: #f8f8f8; display: grid; place-items: center; }
+.work-media--fit img { object-fit: contain; padding: 8%; }
+.work-media--render { background: #0e1014; }
+@media (max-width: 900px) { .cad-gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .cad-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } }
+
 /* Image placeholders: shown until the real file is dropped into assets/ */
 .shot.is-missing {
   background:

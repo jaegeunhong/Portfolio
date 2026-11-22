@@ -294,6 +294,10 @@
         media.src = trigger.dataset.src;
         const img = trigger.querySelector('img');
         media.alt = img ? img.alt : '';
+        // Small screenshots: show them larger so labels stay readable
+        media.addEventListener('load', () => {
+          if (media.naturalWidth < 600) media.style.width = 'min(92vw, 760px)';
+        }, { once: true });
       }
       stage.appendChild(media);
       caption.textContent = trigger.dataset.caption || '';

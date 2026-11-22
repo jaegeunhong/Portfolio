@@ -234,8 +234,8 @@
 
       <div class="work-grid" data-stagger>
         <a class="work-card" href="#iem" data-reveal>
-          <div class="work-media work-media--cad shot">
-            <img src="assets/iem/grip-render.webp" alt="Render of the IEM steering wheel grip" data-ph="Grip render" loading="lazy">
+          <div class="work-media work-media--fit">
+            <img src="assets/iem/01-wheel-front.webp" alt="IEM steering wheel with the round grips, front view" width="300" height="213" loading="lazy">
           </div>
           <div class="work-body">
             <div class="work-top"><span>01 · Formula SAE Electric</span><span class="status"><i aria-hidden="true"></i>In progress</span></div>
@@ -260,8 +260,8 @@
         </a>
 
         <a class="work-card" href="#eoh-wheel" data-reveal>
-          <div class="work-media work-media--cad shot">
-            <img src="assets/eoh/core-iso.webp" alt="Honeycomb core of the variable-stiffness wheel" data-ph="Wheel core render" loading="lazy">
+          <div class="work-media work-media--render">
+            <img src="assets/img/eoh-wheel-render.webp" alt="Render of the variable-stiffness wheel CAD model" loading="lazy">
           </div>
           <div class="work-body">
             <div class="work-top"><span>03 · Personal project · Team lead</span><span class="status"><i aria-hidden="true"></i>In progress</span></div>
@@ -307,43 +307,79 @@
         <div class="stat" data-reveal><span class="stat-n">Nov 3</span><span class="stat-l">Final Design Review, 2026</span></div>
       </div>
 
-      <!-- IEM images: drop files into assets/iem/ with these names (see README) -->
-      <div class="cad-grid">
-        <figure class="cad-view cad-view--hero shot" data-reveal="clip">
-          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/iem/grip-render.webp" data-caption="Steering wheel grip — Creo render." aria-label="View larger: grip render">
-            <img src="assets/iem/grip-render.webp" alt="Render of the round steering wheel grip" data-ph="Grip render · 3/4 view" loading="lazy">
+      <!-- IEM images: screenshots / renders only, no CAD files -->
+      <div class="cad-gallery" data-stagger>
+        <figure class="cad-tile" data-reveal>
+          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/iem/01-wheel-front.webp" data-caption="Steering wheel, front view — round grips on the carbon baseplate." aria-label="View larger: Wheel front">
+            <img src="assets/iem/01-wheel-front.webp" alt="Steering wheel, front view — round grips on the carbon baseplate." loading="lazy">
           </button>
-          <figcaption><span>Render</span>Round grip, Creo</figcaption>
+          <figcaption><span>01</span>Wheel front</figcaption>
         </figure>
-        <figure class="cad-view shot" data-reveal="clip">
-          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/iem/grip-on-baseplate.webp" data-caption="Grip on the carbon fiber baseplate edge." aria-label="View larger: grip on baseplate">
-            <img src="assets/iem/grip-on-baseplate.webp" alt="Grip sliding over the carbon fiber baseplate edge" data-ph="Grip on baseplate" loading="lazy">
+        <figure class="cad-tile" data-reveal>
+          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/iem/02-side-section.webp" data-caption="Side section through the wheel." aria-label="View larger: Side section">
+            <img src="assets/iem/02-side-section.webp" alt="Side section through the wheel." loading="lazy">
           </button>
-          <figcaption><span>Fit</span>On the carbon baseplate</figcaption>
+          <figcaption><span>02</span>Side section</figcaption>
         </figure>
-        <figure class="cad-view shot" data-reveal="clip">
-          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/iem/grip-section.webp" data-caption="Section view — grip bonded on both sides of the baseplate." aria-label="View larger: section view">
-            <img src="assets/iem/grip-section.webp" alt="Section view through the grip and baseplate" data-ph="Section view" loading="lazy">
+        <figure class="cad-tile" data-reveal>
+          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/iem/03-screw-section-iso.webp" data-caption="Section view of a faceplate screw, iso." aria-label="View larger: Screw section (iso)">
+            <img src="assets/iem/03-screw-section-iso.webp" alt="Section view of a faceplate screw, iso." loading="lazy">
           </button>
-          <figcaption><span>Section</span>Bonded both sides</figcaption>
+          <figcaption><span>03</span>Screw section (iso)</figcaption>
         </figure>
-        <figure class="cad-view cad-view--third shot" data-reveal="clip">
-          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/iem/grip-printed.webp" data-caption="ASA grip, printed in house." aria-label="View larger: printed grip">
-            <img src="assets/iem/grip-printed.webp" alt="Bare ASA-printed grip" data-ph="Printed ASA grip" loading="lazy">
+        <figure class="cad-tile" data-reveal>
+          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/iem/04-heat-set-section.webp" data-caption="Section through a screw and heat-set insert." aria-label="View larger: Heat-set insert section">
+            <img src="assets/iem/04-heat-set-section.webp" alt="Section through a screw and heat-set insert." loading="lazy">
           </button>
-          <figcaption><span>Print</span>ASA, in house</figcaption>
+          <figcaption><span>04</span>Heat-set insert section</figcaption>
         </figure>
-        <figure class="cad-view cad-view--third shot" data-reveal="clip">
-          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/iem/grip-finished.webp" data-caption="Grip with the alcantara cover." aria-label="View larger: finished grip">
-            <img src="assets/iem/grip-finished.webp" alt="Grip with alcantara cover" data-ph="Finished grip · alcantara" loading="lazy">
+        <figure class="cad-tile" data-reveal>
+          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/iem/05-heat-set-section-2.webp" data-caption="Second section through a heat-set insert joint." aria-label="View larger: Heat-set insert section 2">
+            <img src="assets/iem/05-heat-set-section-2.webp" alt="Second section through a heat-set insert joint." loading="lazy">
           </button>
-          <figcaption><span>Cover</span>Alcantara</figcaption>
+          <figcaption><span>05</span>Heat-set insert section 2</figcaption>
         </figure>
-        <figure class="cad-view cad-view--third shot" data-reveal="clip">
-          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/iem/faceplate-fasteners.webp" data-caption="Faceplate hardware — 6-32 PCB standoff bolts, rubber sealing washers, 8-32 screws into heat-set inserts." aria-label="View larger: faceplate fasteners">
-            <img src="assets/iem/faceplate-fasteners.webp" alt="Faceplate fasteners: standoffs, sealing washers and heat-set inserts" data-ph="Faceplate fasteners" loading="lazy">
+        <figure class="cad-tile" data-reveal>
+          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/iem/06-thread-engagement.webp" data-caption="Thread engagement through the faceplate." aria-label="View larger: Thread engagement">
+            <img src="assets/iem/06-thread-engagement.webp" alt="Thread engagement through the faceplate." loading="lazy">
           </button>
-          <figcaption><span>Hardware</span>Faceplate fasteners</figcaption>
+          <figcaption><span>06</span>Thread engagement</figcaption>
+        </figure>
+        <figure class="cad-tile" data-reveal>
+          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/iem/07-thread-closeup.webp" data-caption="Close-up of the thread engagement." aria-label="View larger: Thread close-up">
+            <img src="assets/iem/07-thread-closeup.webp" alt="Close-up of the thread engagement." loading="lazy">
+          </button>
+          <figcaption><span>07</span>Thread close-up</figcaption>
+        </figure>
+        <figure class="cad-tile" data-reveal>
+          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/iem/08-creo-ui.webp" data-caption="The grip assembly in PTC Creo." aria-label="View larger: Creo (UI crop)">
+            <img src="assets/iem/08-creo-ui.webp" alt="The grip assembly in PTC Creo." loading="lazy">
+          </button>
+          <figcaption><span>08</span>Creo (UI crop)</figcaption>
+        </figure>
+        <figure class="cad-tile" data-reveal>
+          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/iem/09-grip-slot-section.webp" data-caption="Section through the grip slot on the baseplate edge." aria-label="View larger: Grip slot section">
+            <img src="assets/iem/09-grip-slot-section.webp" alt="Section through the grip slot on the baseplate edge." loading="lazy">
+          </button>
+          <figcaption><span>09</span>Grip slot section</figcaption>
+        </figure>
+        <figure class="cad-tile" data-reveal>
+          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/iem/10-grip-cross-section.webp" data-caption="Grip cross-section: ASA core, cover wrap, and the slot that takes the carbon baseplate." aria-label="View larger: Grip cross-section">
+            <img src="assets/iem/10-grip-cross-section.webp" alt="Grip cross-section: ASA core, cover wrap, and the slot that takes the carbon baseplate." loading="lazy">
+          </button>
+          <figcaption><span>10</span>Grip cross-section</figcaption>
+        </figure>
+        <figure class="cad-tile" data-reveal>
+          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/iem/11-grip-v01-asm.webp" data-caption="Grip v01 in the wheel assembly." aria-label="View larger: Grip v01 in assembly">
+            <img src="assets/iem/11-grip-v01-asm.webp" alt="Grip v01 in the wheel assembly." loading="lazy">
+          </button>
+          <figcaption><span>11</span>Grip v01 in assembly</figcaption>
+        </figure>
+        <figure class="cad-tile" data-reveal>
+          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/iem/12-fastener-joints.webp" data-caption="Faceplate fastener joints: 8-32 enclosure screw and 6-32 PCB standoff." aria-label="View larger: Fastener joints">
+            <img src="assets/iem/12-fastener-joints.webp" alt="Faceplate fastener joints: 8-32 enclosure screw and 6-32 PCB standoff." loading="lazy">
+          </button>
+          <figcaption><span>12</span>Fastener joints</figcaption>
         </figure>
       </div>
 
@@ -366,12 +402,6 @@
             <li class="is-done"><strong>Final Design Review <em class="pill pill--done">Nov 3, 2026</em></strong><span>Presented grips and faceplate fasteners</span></li>
             <li class="is-current"><strong>Finger-groove grips <em class="pill pill--now">In progress</em></strong><span>After FDR, drivers asked for finger-shaped grips. I'm reworking the profile.</span></li>
           </ol>
-          <figure class="cad-view cad-view--wip shot">
-            <button class="media-btn" type="button" data-lightbox="image" data-src="assets/iem/finger-groove-wip.webp" data-caption="Finger-groove grip rework — in progress." aria-label="View larger: finger-groove rework">
-              <img src="assets/iem/finger-groove-wip.webp" alt="Work-in-progress finger-groove grip profile" data-ph="Finger-groove rework (WIP)" loading="lazy">
-            </button>
-            <figcaption><span>WIP</span>Finger-groove profile</figcaption>
-          </figure>
         </div>
       </div>
 
@@ -646,34 +676,6 @@
 
       <p class="mechanism" data-reveal><span>How it works</span>Small actuators tension Kevlar cord spokes so the segmented rim locks rigid; releasing them lets the rim and a TPU honeycomb core go soft.</p>
 
-      <!-- EOH images: exported from export_v6_final (see README) -->
-      <div class="cad-grid">
-        <figure class="cad-view cad-view--half shot" data-reveal="clip">
-          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/eoh/section-rigid.webp" data-caption="Wheel section — rigid." aria-label="View larger: rigid section">
-            <img src="assets/eoh/section-rigid.webp" alt="Section view of the wheel in the rigid state" data-ph="Section · rigid" loading="lazy">
-          </button>
-          <figcaption><span>Rigid</span>Cords tensioned</figcaption>
-        </figure>
-        <figure class="cad-view cad-view--half shot" data-reveal="clip">
-          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/eoh/section-soft.webp" data-caption="Wheel section — soft." aria-label="View larger: soft section">
-            <img src="assets/eoh/section-soft.webp" alt="Section view of the wheel in the soft state" data-ph="Section · soft" loading="lazy">
-          </button>
-          <figcaption><span>Soft</span>Cords released</figcaption>
-        </figure>
-        <figure class="cad-view cad-view--half shot" data-reveal="clip">
-          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/eoh/core-iso.webp" data-caption="TPU honeycomb core." aria-label="View larger: honeycomb core">
-            <img src="assets/eoh/core-iso.webp" alt="Isometric view of the TPU honeycomb core" data-ph="Honeycomb core · iso" loading="lazy">
-          </button>
-          <figcaption><span>Core</span>TPU honeycomb</figcaption>
-        </figure>
-        <figure class="cad-view cad-view--half shot" data-reveal="clip">
-          <button class="media-btn" type="button" data-lightbox="image" data-src="assets/eoh/shuttle-cord-exit.webp" data-caption="Shuttle and Kevlar cord exit." aria-label="View larger: shuttle and cord exit">
-            <img src="assets/eoh/shuttle-cord-exit.webp" alt="Detail of the shuttle and Kevlar cord exit" data-ph="Shuttle & cord exit" loading="lazy">
-          </button>
-          <figcaption><span>Detail</span>Shuttle &amp; cord exit</figcaption>
-        </figure>
-      </div>
-
       <!-- 3D models -->
       <section class="panel model-panel" data-reveal aria-labelledby="eoh-model-title">
         <div class="model-head">
@@ -684,11 +686,12 @@
           <div class="model-tools" role="group" aria-label="Choose a model">
             <button type="button" class="chip-btn" data-model-src="assets/model/eoh-wheel-rigid.glb" aria-pressed="true">Wheel · rigid</button>
             <button type="button" class="chip-btn" data-model-src="assets/model/eoh-wheel-soft.glb" aria-pressed="false">Wheel · soft</button>
-            <button type="button" class="chip-btn" data-model-src="assets/model/eoh-car.glb" aria-pressed="false">Car</button>
+            <button type="button" class="chip-btn" data-model-src="assets/model/eoh-car-rigid.glb" aria-pressed="false">Car · rigid</button>
+            <button type="button" class="chip-btn" data-model-src="assets/model/eoh-car-soft.glb" aria-pressed="false">Car · soft</button>
             <button type="button" class="chip-btn" data-model-action="reset">Reset view</button>
           </div>
         </div>
-        <div class="model-stage" data-model-viewer data-src="assets/model/eoh-wheel-rigid.glb" data-missing="3D model coming soon">
+        <div class="model-stage" data-model-viewer data-src="assets/model/eoh-wheel-rigid.glb" data-view="1.5,0.75,-1.9">
           <div class="model-loading"><span class="spinner" aria-hidden="true"></span><span data-model-status>Loading model…</span></div>
           <p class="model-hint">
             <span class="hint-fine">Drag to rotate · Click, then scroll to zoom</span>

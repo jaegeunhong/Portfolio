@@ -83,6 +83,8 @@ function init(stage, { THREE, GLTFLoader, STLLoader, OrbitControls, MeshoptDecod
   // CAD meshes read best flat-shaded (crisp edges, no smoothing across hard corners)
   const material = new THREE.MeshStandardMaterial({ color: 0xaeb4bd, metalness: 0.35, roughness: 0.5, flatShading: true });
   const home = new THREE.Vector3();
+  // Default camera direction; a stage can override it with data-view="x,y,z"
+  const viewDir = (stage.dataset.view || '1.55,0.8,1.85').split(',').map(Number);
   const cache = new Map();
   let current = null;
   let grid = null;
@@ -129,7 +131,7 @@ function init(stage, { THREE, GLTFLoader, STLLoader, OrbitControls, MeshoptDecod
     const vFov = THREE.MathUtils.degToRad(camera.fov);
     const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
     const fit = r / Math.sin(Math.min(vFov, hFov) / 2);
-    home.set(1.55, 0.8, 1.85).normalize().multiplyScalar(fit * 0.92);
+    home.set(...viewDir).normalize().multiplyScalar(fit * 0.92);
     camera.position.copy(home);
     camera.near = r / 100;
     camera.far = r * 50;
