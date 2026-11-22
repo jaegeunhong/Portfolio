@@ -63,6 +63,8 @@ npx gltfpack -i raw.glb -o model.glb -cc   # meshopt 압축 (SpinLaunch: 1.7 MB 
 ## 배포
 `main` 브랜치에 push하면 GitHub Pages가 1~2분 안에 자동으로 반영함 (Settings → Pages → Deploy from a branch → `main` / root).
 
+CSS/JS를 고치면 `index.html`에서 `style.css?v=…`, `main.js?v=…`, `model-viewer.js?v=…`의 숫자(날짜)를 바꿔 주세요. 그래야 방문자 브라우저가 예전 파일을 캐시에서 쓰지 않고 새 파일을 받습니다.
+
 ## 참고
 - 연락처(이메일·전화)는 Contact 섹션과 모바일 메뉴 하단에 있음
 - 애니메이션은 OS의 "동작 줄이기(Reduce motion)" 설정을 켜면 자동으로 꺼짐
