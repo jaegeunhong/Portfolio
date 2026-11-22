@@ -23,8 +23,8 @@ assets/
 2. **About** (`#about`) — 소개, 전공/스킬, 3가지 포커스 카드
 3. **Selected work** (`#work`) — 프로젝트 카드 4개
 4. **IEM 스티어링 휠 그립** (`#iem`) — In progress
-5. **가변 강성 휠 카** (`#eoh-wheel`) — In progress, 3D 뷰어(휠 rigid / soft / 차량)
-6. **SpinLaunch** (`#spinlaunch`)
+5. **SpinLaunch** (`#spinlaunch`)
+6. **가변 강성 휠 카** (`#eoh-wheel`) — In progress, 3D 뷰어(휠 rigid / soft / 차량)
 7. **VEX Robotics** (`#vex`)
 8. **Contact** (`#contact`) — 이메일(복사 버튼), LinkedIn, 이력서
 

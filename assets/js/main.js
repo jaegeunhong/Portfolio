@@ -10,7 +10,7 @@
   const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
 
   // Page sections, in order (header scroll-spy + arrow-key navigation)
-  const SECTION_IDS = ['home', 'about', 'work', 'iem', 'eoh-wheel', 'spinlaunch', 'vex', 'contact'];
+  const SECTION_IDS = ['home', 'about', 'work', 'iem', 'spinlaunch', 'eoh-wheel', 'vex', 'contact'];
 
   // Callbacks run once per animation frame while scrolling
   const scrollTasks = [];
